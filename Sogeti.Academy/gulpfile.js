@@ -46,4 +46,6 @@ gulp.task('build:fonts', function(){
 
 gulp.task('build:dnx', shell.task(['dnu publish']));
 
-gulp.task('build', ['build:js', 'build:css', 'build:fonts', 'build:dnx']);
+gulp.task('build:client', ['build:js', 'build:css', 'build:fonts']);
+
+gulp.task('build:all', ['build:client', 'build:dnx'])
