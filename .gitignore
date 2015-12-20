@@ -1,0 +1,4 @@
+node_modules
+bin
+__build__
+.vs
