@@ -22,7 +22,10 @@
     "Microsoft.AspNet.Routing": "1.0.0-rc1-final"
   },
   "scripts": {
-    "prepublish": "gulp build:client"
+    "prepublish": [
+      "npm install",
+      "gulp build:client"
+    ]
   },
   "commands": {
     "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost/",
