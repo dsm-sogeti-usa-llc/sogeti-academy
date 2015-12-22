@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,8 +52,8 @@ namespace Sogeti.Academy
         {
             app.UseIISPlatformHandler();
             app.UseDeveloperExceptionPage();
-            app.UseStaticFiles();
             app.UseMvc();
+            app.UseStaticFiles();
         }
 
         // Entry point for the application.
