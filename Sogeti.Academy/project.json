@@ -20,7 +20,7 @@
     "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
     "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
     "Microsoft.Net.Http": "2.2.29",
-    "System.Reflection": "4.1.0-rc2-23621",
+    "System.Reflection": "4.1.0-beta-23516",
     "System.Collections.Concurrent": "4.0.11-beta-23516",
     "System.IO": "4.0.11-beta-23516",
     "System.Linq": "4.0.1-beta-23516",

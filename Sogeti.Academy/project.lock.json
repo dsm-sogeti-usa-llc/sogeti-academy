@@ -1649,7 +1649,7 @@
           "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         }
       },
-      "System.Reflection/4.1.0-rc2-23621": {
+      "System.Reflection/4.1.0-beta-23516": {
         "type": "package",
         "compile": {
           "ref/net45/_._": {}
@@ -3542,7 +3542,7 @@
           "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         }
       },
-      "System.Reflection/4.1.0-rc2-23621": {
+      "System.Reflection/4.1.0-beta-23516": {
         "type": "package",
         "compile": {
           "ref/net45/_._": {}
@@ -5435,7 +5435,7 @@
           "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         }
       },
-      "System.Reflection/4.1.0-rc2-23621": {
+      "System.Reflection/4.1.0-beta-23516": {
         "type": "package",
         "compile": {
           "ref/net45/_._": {}
@@ -7515,10 +7515,10 @@
         "System.Numerics.Vectors.nuspec"
       ]
     },
-    "System.Reflection/4.1.0-rc2-23621": {
+    "System.Reflection/4.1.0-beta-23516": {
       "type": "package",
       "serviceable": true,
-      "sha512": "3vodhY0qR75mBjB14GPXtC0PJ4cYXzZGDT0vueY6tgT89MMsVbHjhjLdADFLp+m4fOu1FJyrI69BEUMXsvpZdg==",
+      "sha512": "wfrnDfk8p2cqJQY3TTHsJRmf3cE3wa6BacncCn4dO58lVwQNNe9ASdLrLJZlMviAjx8+1fUpj6NX7leIOyaBJA==",
       "files": [
         "lib/DNXCore50/System.Reflection.dll",
         "lib/MonoAndroid10/_._",
@@ -7574,8 +7574,8 @@
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "runtimes/win8-aot/lib/netcore50/System.Reflection.dll",
-        "System.Reflection.4.1.0-rc2-23621.nupkg",
-        "System.Reflection.4.1.0-rc2-23621.nupkg.sha512",
+        "System.Reflection.4.1.0-beta-23516.nupkg",
+        "System.Reflection.4.1.0-beta-23516.nupkg.sha512",
         "System.Reflection.nuspec"
       ]
     },
@@ -8224,7 +8224,7 @@
       "Microsoft.Extensions.Configuration.Abstractions >= 1.0.0-rc1-final",
       "Microsoft.Extensions.DependencyInjection >= 1.0.0-rc1-final",
       "Microsoft.Net.Http >= 2.2.29",
-      "System.Reflection >= 4.1.0-rc2-23621",
+      "System.Reflection >= 4.1.0-beta-23516",
       "System.Collections.Concurrent >= 4.0.11-beta-23516",
       "System.IO >= 4.0.11-beta-23516",
       "System.Linq >= 4.0.1-beta-23516",
