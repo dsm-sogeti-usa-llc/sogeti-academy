@@ -1,35 +1,44 @@
-{
+﻿{
   "version": "1.0.0-*",
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+
   "dependencies": {
-    "System.Collections.Concurrent": "4.0.11-beta-23516",
-    "System.Linq": "4.0.1-beta-23516",
-    "System.Linq.Expressions": "4.0.11-beta-23516",
-    "System.IO": "4.0.11-beta-23516",
-    "System.Threading.Tasks": "4.0.11-beta-23516",
-    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
-    "Microsoft.AspNet.Server.WebListener": "1.0.0-rc1-final",
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
     "Microsoft.AspNet.Diagnostics": "1.0.0-rc1-final",
-    "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
+    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
+    "Microsoft.AspNet.Routing": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Server.WebListener": "1.0.0-rc1-final",
+    "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
     "Microsoft.Azure.DocumentDB": "1.5.2",
+    "Microsoft.Dnx.Watcher": "1.0.0-rc1-final",
     "Microsoft.Extensions.Configuration": "1.0.0-rc1-final",
     "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
+    "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
     "Microsoft.Net.Http": "2.2.29",
-    "Microsoft.Dnx.Watcher": "1.0.0-rc1-final",
+    "System.Reflection": "4.1.0-rc2-23621",
+    "System.Collections.Concurrent": "4.0.11-beta-23516",
+    "System.IO": "4.0.11-beta-23516",
+    "System.Linq": "4.0.1-beta-23516",
+    "System.Linq.Expressions": "4.0.11-beta-23516",
+    "System.Threading.Tasks": "4.0.11-beta-23516",
     "xunit": "2.1.0",
-    "xunit.runner.dnx": "2.1.0-rc1-build204",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
-    "Microsoft.AspNet.Routing": "1.0.0-rc1-final"
+    "xunit.runner.dnx": "2.1.0-rc1-build204"
   },
+
   "scripts": {
     "prepublish": [
       "npm install",
       "gulp build:client"
     ]
   },
+
   "commands": {
-    "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost/",
-    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost/",
+    "web": "Microsoft.AspNet.Server.Kestrel",
     "test": "xunit.runner.dnx"
   },
 
@@ -39,8 +48,7 @@
 
   "exclude": [
     "wwwroot",
-    "node_modules",
-    "bin"
+    "node_modules"
   ],
   "publishExclude": [
     "**.user",
