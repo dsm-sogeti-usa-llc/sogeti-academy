@@ -6,7 +6,7 @@
             var id = jQuery(this).attr('id');
             var email = jQuery('#' + id + 'email').val();
             jQuery.ajax({
-                url: '/topics/' + id + '/vote',
+                url: '/api/topics/' + id + '/vote',
                 method: 'POST',
                 data: {
                     topicId: id,
@@ -23,7 +23,7 @@
 
             var topicName = jQuery('#topicName').val();
             jQuery.ajax({
-                url: '/topics',
+                url: '/api/topics',
                 method: 'POST',
                 data: {
                     name: topicName
