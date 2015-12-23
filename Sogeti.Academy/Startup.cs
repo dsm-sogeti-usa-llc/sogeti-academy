@@ -27,6 +27,7 @@ namespace Sogeti.Academy
             var configuratorLocator = new ConfiguratorLocator();
             configuratorLocator.GetConfigurators(StartupAssembly)
                 .ForEach(c => c.Configure(builder));
+            builder.AddEnvironmentVariables();
             _configuration = builder.Build();
         }
 
