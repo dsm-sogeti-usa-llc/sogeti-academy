@@ -33,7 +33,7 @@ namespace Sogeti.Academy.Persistence.Storage
         public async Task UpdateAsync(T item)
         {
             var collection = await GetOrCreateCollection();
-            var document = _client.CreateDocumentQuery<Document>(collection.SelfLink)
+            var document = _client.CreateDocumentQuery<Document>(collection.DocumentsLink)
                 .Where(d => d.Id == item.Id)
                 .ToArray()
                 .Single();
@@ -44,7 +44,7 @@ namespace Sogeti.Academy.Persistence.Storage
         public async Task<T> GetByIdAsync(string id)
         {
             var collection = await GetOrCreateCollection();
-            return _client.CreateDocumentQuery<T>(collection.SelfLink)
+            return _client.CreateDocumentQuery<T>(collection.DocumentsLink)
                 .Where(d => d.Id == id)
                 .ToArray()
                 .FirstOrDefault();
@@ -60,7 +60,7 @@ namespace Sogeti.Academy.Persistence.Storage
         public async Task RemoveAsync(string id)
         {
             var collection = await GetOrCreateCollection();
-            var document = _client.CreateDocumentQuery(collection.SelfLink)
+            var document = _client.CreateDocumentQuery(collection.DocumentsLink)
                 .Where(d => d.ResourceId == id)
                 .ToArray()
                 .First();
