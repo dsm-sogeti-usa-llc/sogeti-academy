@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using Sogeti.Academy.Application.Topics.Models;
 
 namespace Sogeti.Academy.Application.Topics.Factories
@@ -14,6 +14,7 @@ namespace Sogeti.Academy.Application.Topics.Factories
         {
             return new Topic
 			{
+                Id = Guid.NewGuid().ToString(),
 				Name = name
 			};
         }

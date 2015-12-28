@@ -27,7 +27,7 @@ namespace Sogeti.Academy.Persistence.Storage
         public IDocumentCollection<T> GetCollection<T>() where T : IModel<string>
         {
             var type = typeof(T);
-			var collection = _collections.GetOrAdd(type, (t) => new DocumentCollection<T>(_endpointUrl, _authKey));
+			var collection = _collections.GetOrAdd(type, t => new DocumentCollection<T>(_endpointUrl, _authKey));
 			return (IDocumentCollection<T>)collection;
         }
     }

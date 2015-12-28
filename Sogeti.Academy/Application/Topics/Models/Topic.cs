@@ -10,7 +10,11 @@ namespace Sogeti.Academy.Application.Topics.Models
 	{
         [JsonProperty("id")]
 		public string Id { get; set; }
+
+        [JsonProperty("name")]
 		public string Name { get; set; }
+
+        [JsonProperty("votes")]
 		public List<Vote> Votes { get; set; }
 
 	    public Topic()

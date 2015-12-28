@@ -1,37 +1,42 @@
-(function (jQuery) {
-    jQuery(document).ready(function() {
-        jQuery('.topic-vote-form').submit(function (event) {
-            event.preventDefault();
+﻿(function($) {
+    $(document).ready(function() {
+        $('#createTopicForm').submit(function(evt) {
+            evt.preventDefault();
+            showLoading();
 
-            var id = jQuery(this).attr('id');
-            var email = jQuery('#' + id + 'email').val();
-            jQuery.ajax({
-                url: '/api/topics/' + id + '/vote',
+            var json = getJson(this);
+            $.ajax({
+                url: '/api/topics',
                 method: 'POST',
-                data: {
-                    topicId: id,
-                    email: email
-                }
-            })
-            .success(function () {
+                data: json
+            }).success(function() {
                 location.reload();
             });
         });
 
-        jQuery('#createTopicForm').submit(function (event) {
-            event.preventDefault();
+        $('.vote-form').submit(function(evt) {
+            evt.preventDefault();
+            showLoading();
 
-            var topicName = jQuery('#topicName').val();
-            jQuery.ajax({
-                url: '/api/topics',
+            var id = $(this).attr('id');
+            var json = getJson(this);
+            $.ajax({
+                url: '/api/topics/' + id + '/vote',
                 method: 'POST',
-                data: {
-                    name: topicName
-                }
-            })
-            .success(function () {
-                location.reload();        
+                data: json
+            }).success(function() {
+                location.reload();
             });
         });
     });
-})(jQuery = window.jQuery || {});
+
+    function getJson(form) {
+        var inputs = $(form).find(':input');
+        var json = {};
+        for (var i = 0; i < inputs.length; i++) {
+            var input = $(inputs[i]);
+            json[input.attr('name')] = input.val();
+        }
+        return json;
+    }
+})($ = window.$ || {});

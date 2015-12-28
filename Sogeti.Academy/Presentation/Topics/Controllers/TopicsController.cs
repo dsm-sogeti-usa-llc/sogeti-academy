@@ -11,13 +11,13 @@ namespace Sogeti.Academy.Presentation.Topics.Controllers
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly string _apiUrl;
-        
+
         public TopicsController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
             _apiUrl = configuration["Topics:ApiUrl"];
         }
-        
+
         public async Task<IActionResult> Index()
         {
             using (var client = _httpClientFactory.Create())

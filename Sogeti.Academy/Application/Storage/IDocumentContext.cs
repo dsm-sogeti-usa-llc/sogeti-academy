@@ -1,6 +1,5 @@
 using System;
 using Sogeti.Academy.Infrastructure.Models;
-using Sogeti.Academy.Persistence.Storage;
 
 namespace Sogeti.Academy.Application.Storage
 {

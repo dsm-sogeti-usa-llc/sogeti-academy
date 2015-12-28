@@ -1,13 +1,16 @@
 using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Sogeti.Academy.Presentation.General.Http
 {
     public interface IHttpClient : IDisposable
     {
         Task<T> GetJson<T>(string url);
+        Task PostJson<T>(string url, T model);
         Task<TResult> PostJson<TModel, TResult>(string url, TModel model);
         Task PutJson<T>(string url, T model);
         Task DeleteJson(string url);
@@ -16,10 +19,15 @@ namespace Sogeti.Academy.Presentation.General.Http
     public class HttpClient : IHttpClient
     {
         private readonly System.Net.Http.HttpClient _innerClient;
+        private readonly JsonSerializerSettings _serializerSettings;
         
         public HttpClient()
         {
             _innerClient = new System.Net.Http.HttpClient();
+            _serializerSettings = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
         }
         
         public Task DeleteJson(string url)
@@ -38,6 +46,12 @@ namespace Sogeti.Academy.Presentation.General.Http
             return JsonConvert.DeserializeObject<T>(json);
         }
 
+        public Task PostJson<T>(string url, T model)
+        {
+            var content = CreateHttpContent(model);
+            return _innerClient.PostAsync(url, content);
+        }
+
         public async Task<TResult> PostJson<TModel, TResult>(string url, TModel model)
         {
             var content = CreateHttpContent(model);
@@ -52,10 +66,10 @@ namespace Sogeti.Academy.Presentation.General.Http
             return _innerClient.PutAsync(url, content);
         }
         
-        private static HttpContent CreateHttpContent<T>(T model)
+        private HttpContent CreateHttpContent<T>(T model)
         {
-            var json = JsonConvert.SerializeObject(model);
-            return new StringContent(json);
+            var json = JsonConvert.SerializeObject(model, _serializerSettings);
+            return new StringContent(json, Encoding.UTF8, "application/json");
         }
     }
 }

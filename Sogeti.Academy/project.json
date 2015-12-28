@@ -35,6 +35,10 @@
     "prepublish": [
       "npm install",
       "gulp build:client"
+    ],
+    "prebuild": [
+      "npm install",
+      "gulp build:client"
     ]
   },
 

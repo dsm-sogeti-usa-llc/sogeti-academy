@@ -11,7 +11,7 @@
                     Create Topic
                 </button>
                 <div class="collapse create-topic-form" id="createTopic">
-                    <input class="form-control" type="text" name="topicName" id="topicName" required placeholder="Topic" />
+                    <input class="form-control" type="text" name="name" id="name" required placeholder="Topic" />
                     <button type="submit" class="btn btn-default">
                         <span class="glyphicon glyphicon-ok"></span>
                     </button>
@@ -28,7 +28,7 @@
                 @foreach (var topic in Model.Topics)
             {
                     <li class="list-group-item">
-                        <form class="form-inline topic-vote-form" id="@topic.Id" form="role">
+                        <form class="form-inline vote-form" id="@topic.Id" form="role">
                             <button class="btn btn-default btn-vote" data-toggle="collapse" href="#@(topic.Id)collapse">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </button>
@@ -37,7 +37,8 @@
                                 <span class="badge">@topic.Votes</span>
                             </span>
                             <div class="collapse" id="@(topic.Id)collapse" aria-expanded="false">
-                                <input class="form-control" type="email" name="@(topic.Id)email" id="@(topic.Id)email" required placeholder="Email" />
+                                <input class="form-control" type="email" name="email" id="email" required placeholder="Email" />
+                                <input class="form-control" type="hidden" name="topicId" id="topicId" value="@topic.Id" />
                                 <button type="submit" class="btn btn-default">
                                     <span class="glyphicon glyphicon-ok"></span>
                                 </button>

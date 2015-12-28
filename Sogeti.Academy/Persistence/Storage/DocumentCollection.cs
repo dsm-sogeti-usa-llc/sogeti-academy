@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
+using Newtonsoft.Json;
 using Sogeti.Academy.Application.Storage;
 using Sogeti.Academy.Infrastructure.Models;
 using Sogeti.Academy.Infrastructure.Storage;
@@ -27,46 +28,30 @@ namespace Sogeti.Academy.Persistence.Storage
         {
             var collection = await GetOrCreateCollection();
             var response = await _client.CreateDocumentAsync(collection.SelfLink, item);
-            return response.Resource.ResourceId;
+            return response.Resource.Id;
         }
 
         public async Task UpdateAsync(T item)
         {
             var collection = await GetOrCreateCollection();
-            var document = _client.CreateDocumentQuery<Document>(collection.DocumentsLink)
-                .Where(d => d.Id == item.Id)
-                .ToArray()
-                .Single();
+            var document = await GetDocumentById(item.Id);
             UpdateDocument(item, document);
             await _client.UpsertDocumentAsync(collection.SelfLink, document);
         }
 
         public async Task<T> GetByIdAsync(string id)
         {
-            var collection = await GetOrCreateCollection();
-            return _client.CreateDocumentQuery<T>(collection.DocumentsLink)
-                .Where(d => d.Id == id)
-                .ToArray()
-                .FirstOrDefault();
+            var doc = await GetDocumentById(id);
+            return JsonConvert.DeserializeObject<T>(doc.ToString());
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             var collection = await GetOrCreateCollection();
-            return _client.CreateDocumentQuery<T>(collection.DocumentsLink)
+            return _client.CreateDocumentQuery<T>(collection.SelfLink)
                 .ToArray();
         }
-
-        public async Task RemoveAsync(string id)
-        {
-            var collection = await GetOrCreateCollection();
-            var document = _client.CreateDocumentQuery(collection.DocumentsLink)
-                .Where(d => d.ResourceId == id)
-                .ToArray()
-                .First();
-            await _client.DeleteDocumentAsync(document.SelfLink);
-        }
-
+        
         public void Dispose()
         {
             _client.Dispose();
@@ -76,7 +61,7 @@ namespace Sogeti.Academy.Persistence.Storage
         {
             var database = _client.CreateDatabaseQuery()
                 .Where(d => d.Id == _documentAttribute.DatabaseId)
-                .ToArray()
+                .AsEnumerable()
                 .FirstOrDefault();
 
             if (database != null)
@@ -91,7 +76,7 @@ namespace Sogeti.Academy.Persistence.Storage
             var database = await GetOrCreateDatabase();
             var collection = _client.CreateDocumentCollectionQuery(database.SelfLink)
                 .Where(d => d.Id == _documentAttribute.CollectionId)
-                .ToArray()
+                .AsEnumerable()
                 .FirstOrDefault();
 
             if (collection != null)
@@ -101,7 +86,16 @@ namespace Sogeti.Academy.Persistence.Storage
             return await _client.CreateDocumentCollectionAsync(database.SelfLink, collection);
         }
 
-        private void UpdateDocument(T item, Document document)
+        private async Task<Document> GetDocumentById(string id)
+        {
+            var collection = await GetOrCreateCollection();
+            return _client.CreateDocumentQuery<Document>(collection.SelfLink)
+                .Where(d => d.Id == id)
+                .AsEnumerable()
+                .FirstOrDefault();
+        }
+
+        private static void UpdateDocument(T item, Document document)
         {
             foreach (var property in typeof(T).GetProperties())
             {

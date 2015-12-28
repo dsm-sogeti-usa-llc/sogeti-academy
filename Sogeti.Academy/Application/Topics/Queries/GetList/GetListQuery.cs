@@ -34,7 +34,7 @@ namespace Sogeti.Academy.Application.Topics.Queries.GetList
                 {
                     Id = t.Id,
                     Name = t.Name,
-                    Votes = t.Votes.Count
+                    Votes = t.Votes.DistinctBy(v => v.Email).Count()
                 })
                 .OrderByDescending(t => t.Votes);
             return new ListViewModel 
