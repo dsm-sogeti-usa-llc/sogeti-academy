@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sogeti.Academy.Application.Topics.Commands.Create;
 using Sogeti.Academy.Application.Topics.Commands.Vote;
@@ -11,7 +12,7 @@ namespace Sogeti.Academy.Api.Topics.DependencyInjection
 {
     public class TopicsRegistrar : IRegistrar
     {
-        public void RegisterServices(IServiceCollection services)
+        public void RegisterServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<ITopicFactory, TopicFactory>();
             services.AddTransient<IVoteFactory, VoteFactory>();
