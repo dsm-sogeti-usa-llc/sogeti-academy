@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc.Cors;
 using Microsoft.AspNet.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,7 @@ namespace Sogeti.Academy
 {
     public class Startup
     {
+        private const string CorsPolicyName = "SogetiAcademyPolicy";
         private static readonly Assembly StartupAssembly = typeof(Startup).Assembly;
         private readonly ILocator<IRegistrar> _registrarLocator;
         private readonly ILocator<IViewLocationExpander> _viewLocationExpanderLocator;
@@ -38,6 +41,14 @@ namespace Sogeti.Academy
             services.AddInstance(_configuration);
 
             services.AddMvc();
+            services.AddCors(builder => builder.AddPolicy(CorsPolicyName,
+                policy => {
+                    policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
+                }));
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory(CorsPolicyName));
+            });
             services.Configure<RazorViewEngineOptions>(e => {
                 var locatorTypes = _viewLocationExpanderLocator.Locate(StartupAssembly);
                 foreach (var locator in locatorTypes)
@@ -56,6 +67,7 @@ namespace Sogeti.Academy
             app.UseIISPlatformHandler();
             app.UseDeveloperExceptionPage();
             app.UseMvc();
+            app.UseCors(CorsPolicyName);
             app.UseStaticFiles();
         }
 
