@@ -2,3 +2,4 @@ node_modules
 bin
 __build__
 .vs
+project.lock.json

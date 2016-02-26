@@ -1,0 +1,15 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Application Class Library",
+  "authors": [ "bryce" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "dependencies": {
+    "Newtonsoft.Json": "8.0.2",
+    "Infrastructure": ""
+  },
+  "frameworks": {
+    "dnx451": { }
+  }
+}
