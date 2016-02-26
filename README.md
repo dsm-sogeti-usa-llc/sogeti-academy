@@ -12,8 +12,6 @@ Please contact Bryce Klinker for access to the repository with the above informa
   2. [NodeJS](https://nodejs.org/en/)
   3. [Git](https://git-scm.com/)
   
-  Unfortunately, using [VSCode](https://code.visualstudio.com/) isn't an option as one of the packages required for the solution isn't available in .NET Core.
-  
 ##  Start helping
   1. Clone the github repository
     1. Open a command prompt and change to the directory you want to keep your source code. 
