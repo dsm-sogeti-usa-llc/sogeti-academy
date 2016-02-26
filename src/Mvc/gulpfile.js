@@ -7,11 +7,11 @@ var path = require('path');
 var assets = {
     jsdest: path.join(__dirname, 'wwwroot', 'js'),
     js: [
-        path.join(__dirname, '/**/*.js')
+        path.join(__dirname, '**/scripts/**/*.js')
     ],
     cssdest: path.join(__dirname, 'wwwroot', 'css'),
     css: [
-        path.join(__dirname, '/**/*.css')
+        path.join(__dirname, '**/styles/**/*.css')
     ]
 };
 
