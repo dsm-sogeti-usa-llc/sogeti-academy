@@ -13,11 +13,11 @@
     "Application": "",
     "Persistence": "",
     "Infrastructure": "",
-    "Microsoft.ApplicationInsights.AspNet": "1.0.0-beta8"
+    "Microsoft.ApplicationInsights.AspNet": "1.0.0-rc1"
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel"
+    "web": "Microsoft.AspNet.Server.Kestrel --server.urls=http://localhost:9000/"
   },
 
   "frameworks": {

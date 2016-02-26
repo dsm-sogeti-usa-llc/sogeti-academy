@@ -1,0 +1,20 @@
+{
+  "name": "sogeti-academy",
+  "version": "0.0.1",
+  "description": "Home of the source code for Sogeti Academy. This repository is completely open source and therefore contains no passwords, usernames, keys, etc.",
+  "scripts": {
+    "start": "start npm run start:api & start npm run start:mvc",
+    "start:api": "cd .\\src\\Api & dnx web",
+    "start:mvc": "cd .\\src\\Mvc & dnx web"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryce-klinker-sogeti/sogeti-academy.git"
+  },
+  "author": "Sogeti USA, LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bryce-klinker-sogeti/sogeti-academy/issues"
+  },
+  "homepage": "https://github.com/bryce-klinker-sogeti/sogeti-academy#readme"
+}

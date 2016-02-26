@@ -6,7 +6,7 @@ using Sogeti.Academy.Application.Topics.Queries.GetList;
 
 namespace Sogeti.Academy.Api.Topics.Controllers
 {
-	[Route("api/topics")]
+	[Route("topics")]
 	public class TopicsController : Controller
 	{
 		private readonly IGetListQuery _getListQuery;

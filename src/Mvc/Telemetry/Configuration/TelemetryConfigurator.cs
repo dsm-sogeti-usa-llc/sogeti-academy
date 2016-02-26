@@ -1,8 +1,8 @@
 ﻿using System.IO;
-using Sogeti.Academy.Infrastructure.Configuration;
 using Microsoft.Extensions.Configuration;
+using Sogeti.Academy.Infrastructure.Configuration;
 
-namespace Sogeti.Academy.Infrastructure.Telemetry.Configuration
+namespace Sogeti.Academy.Mvc.Telemetry.Configuration
 {
     public class TelemetryConfigurator : IConfigurator
     {
