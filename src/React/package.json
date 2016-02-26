@@ -1,0 +1,40 @@
+{
+  "name": "react-sogeti-academy",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --config ./webpack.dev.js --inline --hot",
+    "build": "webpack --config ./webpack.dev.js",
+    "build:prod": "webpack --config ./webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bryce-klinker-sogeti/sogeti-academy.git"
+  },
+  "author": "Sogeti USA, LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bryce-klinker-sogeti/sogeti-academy/issues"
+  },
+  "homepage": "https://github.com/bryce-klinker-sogeti/sogeti-academy#readme",
+  "dependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.5.2",
+    "babel-loader": "^6.2.3",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "bootstrap": "^3.3.6",
+    "css-loader": "^0.23.1",
+    "html-webpack-plugin": "^2.9.0",
+    "jquery": "^2.2.1",
+    "node-sass": "^3.4.2",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-router": "^2.0.0",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
