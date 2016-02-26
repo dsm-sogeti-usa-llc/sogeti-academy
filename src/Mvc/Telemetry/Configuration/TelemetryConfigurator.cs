@@ -6,7 +6,7 @@ namespace Sogeti.Academy.Mvc.Telemetry.Configuration
 {
     public class TelemetryConfigurator : IConfigurator
     {
-        public void Configure(ConfigurationBuilder builder)
+        public void Configure(IConfigurationBuilder builder)
         {
             builder.AddJsonFile(Path.Combine("Telemetry", "Configuration", "telemetry.json"));
         }

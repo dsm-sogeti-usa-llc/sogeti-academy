@@ -5,7 +5,9 @@ using Sogeti.Academy.Application.Topics.Storage;
 
 namespace Sogeti.Academy.Application.Topics.Commands.Vote
 {
-	public interface IVoteCommand
+    using System;
+
+    public interface IVoteCommand : IDisposable
 	{
 		Task Execute(VoteViewModel viewModel);
 	}
@@ -28,6 +30,11 @@ namespace Sogeti.Academy.Application.Topics.Commands.Vote
             var topic = await collection.GetByIdAsync(viewModel.TopicId);
             topic.Votes.Add(vote);
             await collection.UpdateAsync(topic);
+        }
+
+        public void Dispose()
+        {
+            _toipcsContext.Dispose();
         }
     }
 }

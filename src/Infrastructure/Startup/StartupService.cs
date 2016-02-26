@@ -48,8 +48,6 @@ namespace Sogeti.Academy.Infrastructure.Startup
             _pipelineConfiguratorLocator = pipelineConfiguratorLocator;
             _viewLocationExpanderLocator = viewLocationExpanderLocator;
             _assemblies = assemblies;
-            
-            
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -80,7 +78,7 @@ namespace Sogeti.Academy.Infrastructure.Startup
 
         private List<T> Locate<T>(ILocator<T> locator)
         {
-            return _assemblies.SelectMany(locator.Locate)
+            return _assemblies.SelectMany(assembly => locator.Locate(assembly))
                 .ToList();
         }
     }

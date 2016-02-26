@@ -7,12 +7,12 @@ namespace Sogeti.Academy.Infrastructure.Locator
 {
     public interface ILocator<T>
     {
-        List<T> Locate(Assembly assembly);
+        IEnumerable<T> Locate(Assembly assembly);
     }
 
     public class Locator<T> : ILocator<T>
     {
-        public List<T> Locate(Assembly assembly)
+        public IEnumerable<T> Locate(Assembly assembly)
         {
             if (!typeof(T).IsInterface)
                 throw new NotSupportedException($"{typeof(T).FullName} is not an interface.");
@@ -20,8 +20,7 @@ namespace Sogeti.Academy.Infrastructure.Locator
             return assembly.GetTypes()
                 .Where(t => t.GetInterface(typeof(T).FullName) != null)
                 .Select(Activator.CreateInstance)
-                .Cast<T>()
-                .ToList();
+                .Cast<T>();
         }
     }
 }

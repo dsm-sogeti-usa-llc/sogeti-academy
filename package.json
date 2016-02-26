@@ -5,7 +5,13 @@
   "scripts": {
     "start": "start npm run start:api & start npm run start:mvc",
     "start:api": "cd .\\src\\Api & dnx web",
-    "start:mvc": "cd .\\src\\Mvc & dnx web"
+    "start:mvc": "cd .\\src\\Mvc & dnx web",
+    "test": "npm run test:api & npm run test:mvc & npm run test:application & npm run test:infrastructure & npm run test:persistence",
+    "test:api": "cd .\\test\\Api.Test & dnx test",
+    "test:mvc": "cd .\\test\\Mvc.Test & dnx test",
+    "test:application": "cd .\\test\\Application.Test & dnx test",
+    "test:infrastructure": "cd .\\test\\Infrastructure.Test & dnx test",
+    "test:persistence": "cd .\\test\\Persistence.Test & dnx test"
   },
   "repository": {
     "type": "git",
