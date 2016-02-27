@@ -3,4 +3,4 @@ dist
 bin
 __build__
 .vs
-project.lock.json
+**/project.lock.json

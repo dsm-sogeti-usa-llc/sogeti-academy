@@ -1,11 +1,11 @@
-﻿namespace Sogeti.Academy.Api.Test
-{
-    using System.IO;
-    using Microsoft.Extensions.Configuration;
+﻿using System.IO;
+using Microsoft.Extensions.Configuration;
 
+namespace Mvc.Test
+{
     public static class ConfigurationBuilderFactory
     {
-        public static readonly string BasePath = Path.Combine("..", "..", "src", "Api");
+        public static readonly string BasePath = Path.Combine("..", "..", "src", "Mvc");
 
         public static IConfigurationBuilder Create()
         {

@@ -3,7 +3,6 @@
     using Api.Topics.DependencyInjection;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using System.Linq;
     using Application.Topics.Commands.Create;
     using Application.Topics.Commands.Vote;
     using Application.Topics.Factories;
@@ -11,6 +10,7 @@
     using Application.Topics.Storage;
     using Persistence.Topics.Storage;
     using Xunit;
+    using global::Test.Infrastructure;
 
     public class TopicsRegistrarTest
     {
@@ -30,7 +30,7 @@
         {
             Register();
             
-            var descriptor = GetDescriptor<ITopicFactory, TopicFactory>();
+            var descriptor = _serviceCollection.GetDescriptor<ITopicFactory, TopicFactory>();
             Assert.NotNull(descriptor);
         }
 
@@ -39,7 +39,7 @@
         {
             Register();
 
-            var descriptor = GetDescriptor<IVoteFactory, VoteFactory>();
+            var descriptor = _serviceCollection.GetDescriptor<IVoteFactory, VoteFactory>();
             Assert.NotNull(descriptor);
         }
 
@@ -48,7 +48,7 @@
         {
             Register();
 
-            var descriptor = GetDescriptor<ICreateTopicCommand, CreateTopicCommand>();
+            var descriptor = _serviceCollection.GetDescriptor<ICreateTopicCommand, CreateTopicCommand>();
             Assert.NotNull(descriptor);
         }
 
@@ -57,7 +57,7 @@
         {
             Register();
 
-            var descriptor = GetDescriptor<IVoteCommand, VoteCommand>();
+            var descriptor = _serviceCollection.GetDescriptor<IVoteCommand, VoteCommand>();
             Assert.NotNull(descriptor);
         }
 
@@ -66,7 +66,7 @@
         {
             Register();
 
-            var descriptor = GetDescriptor<IGetListQuery, GetListQuery>();
+            var descriptor = _serviceCollection.GetDescriptor<IGetListQuery, GetListQuery>();
             Assert.NotNull(descriptor);
         }
 
@@ -75,14 +75,8 @@
         {
             Register();
 
-            var descriptor = GetDescriptor<ITopicsContext, TopicsContext>();
+            var descriptor = _serviceCollection.GetDescriptor<ITopicsContext, TopicsContext>();
             Assert.NotNull(descriptor);
-        }
-
-        private ServiceDescriptor GetDescriptor<TInterface, TImplementation>()
-        {
-            return _serviceCollection.Where(s => s.ServiceType == typeof(TInterface))
-                .SingleOrDefault(s => s.ImplementationType == typeof(TImplementation));
         }
 
         private void Register()
