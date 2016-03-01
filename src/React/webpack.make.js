@@ -18,6 +18,7 @@ function getPlugins(env) {
 
 module.exports = function (env) {
     return {
+        devtool: 'sourcemap',
         entry : {
             index: './src/index.jsx'
         },
