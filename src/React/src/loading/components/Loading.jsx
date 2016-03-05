@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {LoadingStore} from '../stores/LoadingStore';
-import * as jQuery from 'jquery';
+import jQuery from 'jquery';
 
 const store = new LoadingStore();
 export class Loading extends React.Component {

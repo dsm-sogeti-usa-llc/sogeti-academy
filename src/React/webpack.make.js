@@ -55,6 +55,19 @@ module.exports = function (env) {
                             }
                         ]
                     })
+                },
+                {
+                    test: /telemetry\.js$/,
+                    loader: StringReplacePlugin.replace({
+                        replacements: [
+                            {
+                                pattern: /\{key\}/,
+                                replacement: function(match, p1, offset, string) {
+                                    return process.env['ApplicationInsights:InstrumentationKey'];
+                                }
+                            }
+                        ]
+                    })
                 }
             ]
         },
