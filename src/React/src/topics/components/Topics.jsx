@@ -10,17 +10,13 @@ export class Topics extends React.Component {
     constructor(props, context) {
         super(props, context);
         
-        this.state = {
-            topics: topicsStore.getAll()
-        };
+        this.state = topicsStore.getState();
         topicsStore.addChangeListener(this.onChange.bind(this));
         loadTopics();
     }
     
     onChange() {
-        this.setState({
-            topics: topicsStore.getAll()
-        });
+        this.setState(topicsStore.getState());
     }
     
     render() {

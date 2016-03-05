@@ -5,12 +5,12 @@ export class TopicItem extends React.Component {
         return (
             <li className="list-group-item">
                 <form className="form-inline" form="role">
-                    <button className="btn btn-default">
+                    <button className="btn btn-default btn-vote">
                         <span className="glyphicon glyphicon-plus"></span>
                     </button>
                     <span>
-                        {this.props.topic.name}
-                        <span className="badge">{this.props.topic.votes}</span>
+                        {this.props.topic.Name}&nbsp;
+                        <span className="badge">{this.props.topic.Votes}</span>
                     </span>
                     <div className="collapse">
                         <input className="form-control" type="email" name="email" id="email" required placeholder="Email" />

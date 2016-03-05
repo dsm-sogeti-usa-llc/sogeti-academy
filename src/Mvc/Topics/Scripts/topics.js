@@ -6,7 +6,7 @@
 
             var json = getJson(this);
             $.ajax({
-                url: 'http://api-sogetiacademy.azurewebsites.net/topics',
+                url: 'https://api-sogetiacademy.azurewebsites.net/topics',
                 method: 'POST',
                 data: json
             }).success(function() {
@@ -21,7 +21,7 @@
             var id = $(this).attr('id');
             var json = getJson(this);
             $.ajax({
-                url: 'http://api-sogetiacademy.azurewebsites.net/topics/' + id + '/vote',
+                url: 'https://api-sogetiacademy.azurewebsites.net/topics/' + id + '/vote',
                 method: 'POST',
                 data: json
             }).success(function() {

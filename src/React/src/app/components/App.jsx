@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {Loading} from '../../loading/components/Loading';
 
 export class App extends React.Component {
     render() {
@@ -37,6 +38,7 @@ export class App extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Loading />
             </div>
         );
     }
