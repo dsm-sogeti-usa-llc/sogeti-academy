@@ -5,7 +5,7 @@ import {config} from '../../core/config';
 function getTopics() {
     return new Promise((resolve, reject) => {
         jQuery.get(`${config.apiUrl}/topics`)
-            .success(data => resolve(data))
+            .success(data => resolve(data.Topics))
             .error((jqXHR, textStatus) => reject(textStatus));
     });
 }

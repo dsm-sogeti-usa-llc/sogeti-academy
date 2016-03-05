@@ -1,6 +1,8 @@
 import {AppDispatcher} from '../../core/AppDispatcher';
 import {TopicsService} from '../services/TopicsService';
 
+export const LOAD_TOPICS_SUCCESS = 'LOAD_TOPICS_SUCCESS';
+
 export function createTopic(name) {
     const action = {
         actionType: 'CREATE_TOPIC',
@@ -90,7 +92,7 @@ export function loadTopics() {
 
 export function topicsLoadSuccess(topics) {
     const action = {
-        actionType: 'LOAD_TOPICS_SUCCESS',
+        actionType: LOAD_TOPICS_SUCCESS,
         data: {
             topics: topics
         }

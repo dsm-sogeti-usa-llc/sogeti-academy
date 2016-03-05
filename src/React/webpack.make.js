@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var StringReplacePlugin = require('string-replace-webpack-plugin');
 var path = require('path');
 
 function getHtmlPlugin() {
@@ -12,6 +13,7 @@ function getHtmlPlugin() {
 function getPlugins(env) {
     var plugins = [];
     plugins.push(new webpack.optimize.DedupePlugin());
+    plugins.push(new StringReplacePlugin());
     plugins.push(getHtmlPlugin());
     return plugins;
 }
@@ -40,6 +42,19 @@ module.exports = function (env) {
                 {
                     test: /\.(css|scss)$/,
                     loader: 'style!css!sass'
+                },
+                {
+                    test: /config\.js$/,
+                    loader: StringReplacePlugin.replace({
+                        replacements: [
+                            {
+                                pattern: /\'\'/,
+                                replacement: function(match, p1, offset, string) {
+                                    return "'" + process.env['Topics:ApiUrl'] + "'";
+                                }
+                            }
+                        ]
+                    })
                 }
             ]
         },
