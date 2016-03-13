@@ -24,5 +24,7 @@
     "url": "https://github.com/bryce-klinker-sogeti/sogeti-academy/issues"
   },
   "homepage": "https://github.com/bryce-klinker-sogeti/sogeti-academy#readme",
-  "dependencies": {}
+  "dependencies": {
+    "expose-loader": "^0.7.1"
+  }
 }

@@ -1,6 +1,6 @@
 import {EventEmitter} from 'events'
 import {AppDispatcher} from '../../core/AppDispatcher';
-import {LOAD_TOPICS_SUCCESS} from '../actions/TopicsActions';
+import {LOAD_TOPICS_SUCCESS, CREATE_TOPIC_SUCCESS, VOTE_FOR_TOPIC_SUCCESS} from '../actions/TopicsActions';
 
 let state = { topics: [] };
 export class TopicsStore extends EventEmitter {
@@ -32,6 +32,16 @@ export class TopicsStore extends EventEmitter {
                     state = { topics: action.data.topics };
                     this.emitChange();
                     break;
+                case CREATE_TOPIC_SUCCESS: 
+                    state.topics.push(action.data);
+                    this.emitChange();
+                    break;
+                
+                case VOTE_FOR_TOPIC_SUCCESS: 
+                    const topic = state.topics.find(t => t.Id === action.data.topicId);
+                    topic.Votes = topic.Votes + 1;
+                    this.emitChange();
+                    break;  
             }
         })
     }

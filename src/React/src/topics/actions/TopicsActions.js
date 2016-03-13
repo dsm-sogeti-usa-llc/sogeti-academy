@@ -35,9 +35,9 @@ export function createTopicSuccess(id, name) {
     const action = {
         actionType: CREATE_TOPIC_SUCCESS,
         data: {
-            id: id,
-            name: name,
-            votes: 0
+            Id: id,
+            Name: name,
+            Votes: 0
         }
     };
     AppDispatcher.dispatch(action);

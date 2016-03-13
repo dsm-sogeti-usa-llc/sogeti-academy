@@ -6,6 +6,8 @@ import {App} from './app/components/App';
 import {Home} from './home/components/Home';
 import {Topics} from './topics/components/Topics';
 import {Tooling} from './tooling/components/Tooling';
+import 'jquery';
+import 'bootstrap';
 
 render(
     <Router history={hashHistory}>

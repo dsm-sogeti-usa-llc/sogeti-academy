@@ -57,6 +57,10 @@ module.exports = function (env) {
                     })
                 },
                 {
+                    test: require.resolve('jquery'),
+                    loader: 'expose?$!expose?jQuery'  
+                },
+                {
                     test: /telemetry\.js$/,
                     loader: StringReplacePlugin.replace({
                         replacements: [

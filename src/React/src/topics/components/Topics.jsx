@@ -4,8 +4,9 @@ import {CreateTopic} from './CreateTopic';
 import {TopicsList} from './TopicsList';
 import {TopicsStore} from '../stores/TopicsStore';
 
-const topicsStore = new TopicsStore();
 import '../styles/topics';
+
+const topicsStore = new TopicsStore();
 export class Topics extends React.Component {
     constructor(props, context) {
         super(props, context);
