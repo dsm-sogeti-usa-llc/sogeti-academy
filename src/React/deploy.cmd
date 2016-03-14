@@ -110,7 +110,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Post deployment stub
-call :ExecuteCmd !NPM_CMD! run "build:prod"
+!NPM_CMD! run "build:prod"
 IF !ERRORLEVEL! NEQ 0 goto error
 
 goto end
