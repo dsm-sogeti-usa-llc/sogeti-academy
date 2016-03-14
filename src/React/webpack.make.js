@@ -18,6 +18,12 @@ function getPlugins(env) {
     return plugins;
 }
 
+function getOutputPath(env) {
+    return env === 'prod'
+        ? path.join(__dirname)
+        : path.join(__dirname, 'dist');
+}
+
 module.exports = function (env) {
     return {
         devtool: 'sourcemap',
@@ -25,7 +31,7 @@ module.exports = function (env) {
             index: './src/index.jsx'
         },
         output: {
-            path: path.join(__dirname, 'dist'),
+            path: getOutputPath(env),
             filename: 'js/[name].js',
             sourceMapFilename: '[file].map',
             chunkFilename: 'js/[id].js'
