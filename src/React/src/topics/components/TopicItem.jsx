@@ -24,7 +24,9 @@ export class TopicItem extends React.Component {
         });
     }
     
-    toggleVote() {
+    toggleVote(evt) {
+        evt.preventDefault();
+        
         this.setState({
             isVoteOpen: !this.state.isVoteOpen,
             email: this.state.email

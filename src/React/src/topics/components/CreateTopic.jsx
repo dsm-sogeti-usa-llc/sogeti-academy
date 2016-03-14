@@ -24,7 +24,9 @@ export class CreateTopic extends React.Component {
         })
     }
     
-    toggleForm() {
+    toggleForm(evt) {
+        evt.preventDefault();
+        
         this.setState({
             isFormOpen: !this.state.isFormOpen,
             name: this.state.name
