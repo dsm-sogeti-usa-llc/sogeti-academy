@@ -6,7 +6,7 @@
     "start": "start npm run start:api & start npm run start:mvc & start npm run start:react",
     "start:api": "cd .\\src\\Api & dnx web",
     "start:mvc": "cd .\\src\\Mvc & dnx web",
-    "start:react": "cd .\\src\\React & npm start",
+    "start:react": "cd .\\src\\React & npm run start:dev",
     "test": "npm run test:api & npm run test:mvc & npm run test:application & npm run test:infrastructure & npm run test:persistence",
     "test:api": "cd .\\test\\Api.Test & dnx test",
     "test:mvc": "cd .\\test\\Mvc.Test & dnx test",
