@@ -1,5 +1,7 @@
 @if "%SCM_TRACE_LEVEL%" NEQ "4" @echo off
 
+
+
 :: ----------------------
 :: KUDU Deployment Script
 :: Version: 0.2.2
@@ -108,7 +110,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Post deployment stub
-IF DEFINED POST_DEPLOYMENT_ACTION call "%POST_DEPLOYMENT_ACTION%"
+call :ExecuteCmd !NPM_CMD! run build:prod
 IF !ERRORLEVEL! NEQ 0 goto error
 
 goto end
