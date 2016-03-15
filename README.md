@@ -19,7 +19,7 @@ Please contact Bryce Klinker for access to the repository with the above informa
       1. This will create a sogeti-academy directory. This directory will contain all of the code for Sogeti Academy
   2. Install gulp globally. In a command prompt type the following
     2. npm install gulp -g
-  3. Open the sogeti-academy/Sogeti.Academy/Sogeti.Academy.sln in Visual Studio
+  3. Open the sogeti-academy/Sogeti.Academy.sln in Visual Studio
   4. Right-click on the Solution 'Sogeti.Academy' item in the Solution Explorer window. Select "Restore NuGet Packages"
   5. Right-click on the Dependencies item under Sogeti.Academy node in Solution Explorer. Select "Restore Packages"
   6. You will also need to setup some environment variables.
