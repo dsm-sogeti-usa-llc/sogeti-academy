@@ -4,3 +4,4 @@ bin
 __build__
 .vs
 **/project.lock.json
+typings
