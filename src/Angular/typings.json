@@ -7,6 +7,9 @@
     "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160112161118",
     "jasmine": "registry:dt/jasmine#2.2.0+20160308082659",
     "jquery": "registry:dt/jquery#1.10.0+20160303223636",
-    "node": "registry:dt/node#4.0.0+20160311162451"
+    "node": "registry:dt/node#4.0.0+20160311162451",
+    "source-map": "registry:dt/source-map#0.0.0+20151201114758",
+    "uglify-js": "registry:dt/uglify-js#2.6.1+20160106153543",
+    "webpack": "registry:dt/webpack#1.12.9+20160125043835"
   }
 }

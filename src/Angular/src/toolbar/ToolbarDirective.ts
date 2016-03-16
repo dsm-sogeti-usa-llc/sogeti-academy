@@ -1,5 +1,6 @@
 import {ToolbarController} from './controllers/ToolbarController';
 
+import './styles/toolbar';
 export class ToolbarDirective implements angular.IDirective {
     scope = {};
     controller = ToolbarController;

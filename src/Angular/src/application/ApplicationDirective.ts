@@ -1,7 +1,8 @@
+import {ApplicationController} from './controllers/ApplicationController';
+
 import '../sidenav/SideNavDirective';
 import '../toolbar/ToolbarDirective';
-
-import {ApplicationController} from './controllers/ApplicationController';
+import './styles/application';
 
 export class ApplicationDirective implements angular.IDirective {
     scope = {};

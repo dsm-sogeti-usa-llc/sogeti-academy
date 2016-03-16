@@ -1,8 +1,8 @@
-<div layout="row">
+<div layout="row" flex layout-fill class="content">
     <side-nav></side-nav>
-    <div layout="column" >
+    <div role="main" layout="column" flex>
         <toolbar></toolbar>
-        <md-content ui-view layout="column" flex>
+        <md-content ui-view layout="column" flex md-scroll-y>
         </md-content>
     </div>
 </div>

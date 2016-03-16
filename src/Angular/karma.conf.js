@@ -6,18 +6,14 @@ module.exports = function(config) {
         basePath: '',
         frameworks: ['jasmine'],
         files: [
-            './src/vendor.ts',
-            './src/index.ts',
             './src/tests.js'
         ],
         exclude: [
         ],
         preprocessors: {
-            './src/vendor.ts': ['webpack', 'sourcemap'],
-            './src/index.ts': ['webpack', 'sourcemap'],
             './src/tests.js': ['webpack', 'sourcemap']
         },
-        reporters: ['progress'],
+        reporters: ['spec'],
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,

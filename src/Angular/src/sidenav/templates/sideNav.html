@@ -1,2 +1,14 @@
-<md-side-nav>
-</md-side-nav>
+<md-sidenav md-component-id="left" md-is-locked-open="$sideNav.isDockedOpen">
+    <header flex>
+        <a ui-sref="$sideNav.homeState.name">
+            {{$sideNav.homeState.title}}
+        </a>
+    </header>
+    <md-content flex role="navigation">
+        <ul>
+            <li flex ng-repeat="state in $sideNav.states">
+                {{state.title}}
+            </li>
+        </ul>
+    </md-content>
+</md-sidenav>

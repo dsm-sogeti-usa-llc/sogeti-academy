@@ -2,13 +2,20 @@ var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+function getEntry(env) {
+    if (env === 'test') {
+        return undefined;
+    }
+    return {
+        vendor: './src/vendor.ts',
+        index: './src/index.ts'
+    };
+}
+
 module.exports = function(env) {
     return {
         devtool: 'sourcemap',
-        entry: {
-            vendor: './src/vendor.ts',
-            index: './src/index.ts'
-        },
+        entry: getEntry(env),
         output: {
             path: path.join(__dirname, 'dist'),
             filename: 'js/[name].js',
