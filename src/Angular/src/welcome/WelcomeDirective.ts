@@ -1,5 +1,6 @@
 import {WelcomeController} from './controllers/WelcomeController';
 
+import './styles/welcome';
 export class WelcomeDirective implements angular.IDirective {
     scope = {};
     controller = WelcomeController;

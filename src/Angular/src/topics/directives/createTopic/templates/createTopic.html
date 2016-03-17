@@ -1,0 +1,29 @@
+<md-dialog aria-label="Create Topic">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Create Topic</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="$create.cancel()">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-input-container>
+                    <label>Topic Name</label>
+                    <input ng-model="$create.topicName" type="text" md-autofocus/>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row" layout-align="end center">
+            <md-button ng-click="$create.save()">
+                Save
+            </md-button>
+            <md-button ng-click="$create.cancel()">
+                Cancel
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

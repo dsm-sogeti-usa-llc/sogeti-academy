@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var StringReplacePlugin = require('string-replace-webpack-plugin');
 
 function getEntry(env) {
     if (env === 'test') {
@@ -37,6 +38,19 @@ module.exports = function(env) {
                 {
                     test: /\.html$/,
                     loader: 'html'
+                },
+                {
+                    test: /ConfigService\.ts$/,
+                    loader: StringReplacePlugin.replace({
+                        replacements: [
+                            {
+                                pattern: /\$apiUrl\$/,
+                                replacement: function(match, p1, offset, string) {
+                                    return process.env['Topics:ApiUrl'];
+                                }
+                            }
+                        ]
+                    })
                 }
             ]
         },
@@ -44,7 +58,8 @@ module.exports = function(env) {
             new HtmlWebpackPlugin({
                 template: './src/index.html',
                 inject: 'body'
-            })
+            }),
+            new StringReplacePlugin()
         ]
     }
 }

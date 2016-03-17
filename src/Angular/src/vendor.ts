@@ -1,3 +1,4 @@
+import 'es6-promise';
 import 'jquery';
 import 'angular';
 import 'angular-messages';
