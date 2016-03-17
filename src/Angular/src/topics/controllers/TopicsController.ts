@@ -9,6 +9,7 @@ export class TopicsController {
     constructor(private $scope: angular.IScope,
         private $mdDialog: angular.material.IDialogService,
         private topicsService: TopicsService) {
+            
         this.topics = [];
         this.topicsService.getAll().then(topics => {
             this.topics = topics;
@@ -24,20 +25,22 @@ export class TopicsController {
             escapeToClose: false,
             autoWrap: false
         }
-        this.$mdDialog.show(options);
+        this.$mdDialog.show(options)
+            .then(topic => this.topics.push(topic));
     }
     
     voteForTopic(topic: Topic): void {
+        const dialogScope = this.$scope.$new();
+        dialogScope['topic'] = topic;
         const options: angular.material.IDialogOptions = {
-            template: '<vote-for-topic></vote-for-topic>',
+            template: '<vote-for-topic topic="topic"></vote-for-topic>',
             hasBackdrop: true,
             clickOutsideToClose: false,
             escapeToClose: false,
             autoWrap: false,
-            locals: {
-                topic: topic
-            }
-        }
-        this.$mdDialog.show(options);
+            scope: dialogScope
+        };
+        this.$mdDialog.show(options)
+            .then(() => topic.Votes++);
     }
 }

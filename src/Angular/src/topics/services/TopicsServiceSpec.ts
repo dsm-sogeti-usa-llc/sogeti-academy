@@ -1,6 +1,7 @@
 import {TopicsService} from './TopicsService';
 import {ConfigService} from '../../core/ConfigService';
 import {Topic} from '../models/Topic';
+import {Vote} from '../models/Vote';
 
 describe('TopicsService', () => {
     let $httpBackend: angular.IHttpBackendService;
@@ -31,6 +32,31 @@ describe('TopicsService', () => {
             done();
         });
         $httpBackend.flush();
+    });
+
+    it('should create topic in api', (done) => {
+        const url = `${configService.apiUrl}/topics`;
+        const id = 'gasdfsad;flk';
+        const topic = {Name: 'something', Votes: 0 };
+        
+        $httpBackend.expectPOST(url, topic).respond(id);
+        
+        topicsService.createTopic(topic).then(actual => {
+            expect(actual).toBe(id);
+            done();   
+        });
+        $httpBackend.flush();
+    });
+    
+    it('should vote in api', (done) => {
+        const vote: Vote = { topicId: 'asdgasdf', email: 'asdgadsfsf' };
+        const url = `${configService.apiUrl}/topics/${vote.topicId}/vote`;
+         $httpBackend.expectPOST(url, vote).respond({});
+         
+         topicsService.voteForTopic(vote).then(() =>{
+             done();
+         });
+         $httpBackend.flush();
     });
 
     afterEach(() => {

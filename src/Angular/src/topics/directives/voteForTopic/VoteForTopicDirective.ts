@@ -5,6 +5,9 @@ export class VoteForTopicDirective implements angular.IDirective {
     controller = VoteForTopicController;
     controllerAs = '$vote';
     template = require('./templates/voteForTopic');
+    bindToController = {
+        topic: '='
+    };
     
     static factory(): angular.IDirectiveFactory {
         return () => new VoteForTopicDirective();

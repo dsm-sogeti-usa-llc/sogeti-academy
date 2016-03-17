@@ -22,11 +22,23 @@ export class TopicsService {
     }
     
     createTopic(topic: Topic): Promise<string> {
-        throw 'Not Implemented';
+        return new Promise<string>((resolve) => {
+           const url = `${this._apiUrl}/topics`;
+           this.$http.post(url, topic)
+                .then(
+                    (response: angular.IHttpPromiseCallbackArg<any>) => resolve(response.data)
+                );
+        });
     }
     
     voteForTopic(vote: Vote): Promise<void> {
-        throw 'Not Implemented';
+        return new Promise<void>((resolve) => {
+            const url = `${this._apiUrl}/topics/${vote.topicId}/vote`;
+            this.$http.post(url, vote)
+                .then(
+                    (response: angular.IHttpPromiseCallback<any>) => resolve()
+                );
+        });
     }
 }
 angular.module('sogeti-academy')

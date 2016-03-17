@@ -28,7 +28,11 @@ describe('VoteForTopicDirective', () => {
         expect(directive.controllerAs).toBe('$vote');
     });
     
+    it('should bind to controller', () => {
+        expect(directive.bindToController.topic).toBe('=');
+    })
+    
     it('should specify template', () => {
         expect(directive.template).toBe(require('./templates/voteForTopic'));
-    })
+    });
 });
