@@ -11,5 +11,6 @@ namespace Sogeti.Academy.Application.Storage
         Task<string> CreateAsync(T item);
         Task UpdateAsync(T item);
         Task<T> GetByIdAsync(string id);
+        Task RemoveById(string id);
     }
 }

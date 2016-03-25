@@ -1,13 +1,15 @@
-<md-sidenav md-component-id="left" md-is-locked-open="$sideNav.isDockedOpen">
-    <header flex>
-        <a ui-sref="$sideNav.homeState.name">
-            {{$sideNav.homeState.title}}
-        </a>
+<md-sidenav class="md-sidenav-left" md-is-open="$sidenav.isSidenavOpen" md-component-id="left" md-is-locked-open="$sideNav.isDockedOpen">
+    <header layout-padding>
+        <md-button ng-click="$sidenav.navigate($sidenav.homeState)">
+            {{$sidenav.homeState.title}}
+        </md-button>
     </header>
-    <md-content flex role="navigation">
+    <md-content layout-padding role="navigation">
         <ul>
-            <li flex ng-repeat="state in $sideNav.states">
-                {{state.title}}
+            <li flex ng-repeat="state in $sidenav.states">
+                <md-button flex ng-click="$sidenav.navigate(state)" >
+                    {{state.title}}
+                </md-button>
             </li>
         </ul>
     </md-content>

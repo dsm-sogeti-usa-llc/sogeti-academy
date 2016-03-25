@@ -60,6 +60,9 @@ module.exports = function(env) {
                 inject: 'body'
             }),
             new StringReplacePlugin()
-        ]
+        ],
+        devServer: {
+            port: 8082
+        }
     }
 }

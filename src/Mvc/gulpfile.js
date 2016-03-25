@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var shell = require('gulp-shell');
 var concat = require('gulp-concat');
 var watch = require('gulp-watch');
+var replace = require('gulp-replace');
 var path = require('path');
 
 var assets = {
@@ -18,6 +19,7 @@ var assets = {
 gulp.task('build:js', function () {
     return gulp.src(assets.js)
         .pipe(concat('app.js'))
+        .pipe(replace('$apiUrl$', process.env['Topics:ApiUrl']))
         .pipe(gulp.dest(assets.jsdest));
 });
 

@@ -21,7 +21,7 @@ export class VoteForTopicController {
     }
     
     cancel(): void {
-        this.$mdDialog.hide();
+        this.$mdDialog.cancel();
     }
     
     save(): void {

@@ -1,23 +1,23 @@
-import {SideNavService} from './SideNavService';
+import {SidenavService} from './SidenavService';
 import {WelcomeState} from '../../welcome/states/WelcomeState';
 import {TopicsState} from '../../topics/states/TopicsState';
 
 describe('SideNavService', () => {
-    let sideNavService: SideNavService
+    let sidenavService: SidenavService
     
     beforeEach(angular.mock.module('sogeti-academy'));
     
-    beforeEach(angular.mock.inject((_SideNavService_) => {
-        sideNavService = _SideNavService_;
+    beforeEach(angular.mock.inject((_SidenavService_) => {
+        sidenavService = _SidenavService_;
     }))
     
     it('should include WelcomeState', () => {
-         const states = sideNavService.getAllStates();
+         const states = sidenavService.getAllStates();
          expect(states.indexOf(WelcomeState)).toBeGreaterThan(-1);
     });
     
     it('should include TopicsState', () => {
-       const states = sideNavService.getAllStates();
+       const states = sidenavService.getAllStates();
        expect(states.indexOf(TopicsState)).toBeGreaterThan(-1); 
     });
 });

@@ -19,7 +19,7 @@ export class CreateTopicController {
     }
     
     cancel(): void {
-        this.$mdDialog.hide();
+        this.$mdDialog.cancel();
     }
     
     save(): void {

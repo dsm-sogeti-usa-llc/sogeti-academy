@@ -1,5 +1,5 @@
 <div layout="column" flex>
-    <md-list md-scroll-y>
+    <md-list>
         <md-list-item ng-repeat="topic in $topics.topics">
             <md-icon class="vote-count">{{topic.Votes}}</md-icon>
             <p>{{topic.Name}}</p>
@@ -8,7 +8,7 @@
             </md-button>
         </md-list-item>
     </md-list>
-    <md-fab-toolbar md-open="$topics.isToolbarOpen" md-direction="left">
+    <md-fab-toolbar class="fixed-fab-toolbar" md-open="$topics.isToolbarOpen" md-direction="left">
         <md-fab-trigger class="align-with-text">
             <md-button aria-label="menu" class="md-fab md-primary">
                 <md-icon>menu</md-icon>

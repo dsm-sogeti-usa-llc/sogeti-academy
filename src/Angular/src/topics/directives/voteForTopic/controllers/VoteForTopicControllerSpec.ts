@@ -27,11 +27,11 @@ describe('VoteForTopicController', () => {
     }));
 
     it('should hide dialog', () => {
-        spyOn($mdDialog, 'hide').and.callThrough();
+        spyOn($mdDialog, 'cancel').and.callThrough();
 
         const controller = createController();
         controller.cancel();
-        expect($mdDialog.hide).toHaveBeenCalled();
+        expect($mdDialog.cancel).toHaveBeenCalled();
     });
 
     it('should have topic name', () => {

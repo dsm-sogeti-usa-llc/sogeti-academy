@@ -19,9 +19,11 @@ function hideLoading() {
 
             var json = getJson(this);
             $.ajax({
-                url: '/api/topics',
+                url: 'http://localhost:9000/topics',
+                contentType:'application/json; charset=UTF-8',
                 method: 'POST',
-                data: json
+                data: JSON.stringify(json),
+                dataType: 'json'
             }).success(function() {
                 location.reload();
             });
@@ -34,9 +36,11 @@ function hideLoading() {
             var id = $(this).attr('id');
             var json = getJson(this);
             $.ajax({
-                url: '/api/topics/' + id + '/vote',
+                url: 'http://localhost:9000/topics/' + id + '/vote',
+                contentType:'application/json; charset=UTF-8',
                 method: 'POST',
-                data: json
+                data: JSON.stringify(json),
+                dataType: 'json'
             }).success(function() {
                 location.reload();
             });
@@ -74,9 +78,11 @@ function hideLoading() {
 
             var json = getJson(this);
             $.ajax({
-                url: '/api/topics',
+                url: 'http://localhost:9000/topics',
+                contentType:'application/json',
                 method: 'POST',
-                data: json
+                data: JSON.stringify(json),
+                dataType: 'json'
             }).success(function() {
                 location.reload();
             });
@@ -89,9 +95,11 @@ function hideLoading() {
             var id = $(this).attr('id');
             var json = getJson(this);
             $.ajax({
-                url: '/api/topics/' + id + '/vote',
+                url: 'http://localhost:9000/topics/' + id + '/vote',
+                contentType:'application/json',
                 method: 'POST',
-                data: json
+                data: JSON.stringify(json),
+                dataType: 'json'
             }).success(function() {
                 location.reload();
             });

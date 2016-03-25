@@ -1,6 +1,6 @@
 import {ApplicationController} from './controllers/ApplicationController';
 
-import '../sidenav/SideNavDirective';
+import '../sidenav/SidenavDirective';
 import '../toolbar/ToolbarDirective';
 import './styles/application';
 

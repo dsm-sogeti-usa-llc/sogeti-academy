@@ -24,11 +24,11 @@ describe('CreateTopicController', () => {
     }));
     
     it('should hide dialog', () => {
-        spyOn($mdDialog, 'hide').and.callFake(() => {});
+        spyOn($mdDialog, 'cancel').and.callFake(() => {});
         
         const controller = createController();
         controller.cancel();
-        expect($mdDialog.hide).toHaveBeenCalled(); 
+        expect($mdDialog.cancel).toHaveBeenCalled(); 
     });
     
     it('should not allow save', () => {

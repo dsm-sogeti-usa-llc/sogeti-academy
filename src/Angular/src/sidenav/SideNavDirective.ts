@@ -1,15 +1,15 @@
-import {SideNavController} from './controllers/SideNavController';
+import {SidenavController} from './controllers/SidenavController';
 
-export class SideNavDirective implements angular.IDirective {
+export class SidenavDirective implements angular.IDirective {
     scope = {};
-    controller = SideNavController;
-    controllerAs = '$sideNav';
-    template = require('./templates/sideNav');
+    controller = SidenavController;
+    controllerAs = '$sidenav';
+    template = require('./templates/sidenav');
     
     static factory(): angular.IDirectiveFactory {
-        return () => new SideNavDirective();
+        return () => new SidenavDirective();
     }
 }
 
 angular.module('sogeti-academy')
-    .directive('sideNav', SideNavDirective.factory());
+    .directive('sidenav', SidenavDirective.factory());

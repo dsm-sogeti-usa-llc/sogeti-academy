@@ -37,7 +37,7 @@ namespace Sogeti.Academy.Api.Topics.Controllers
 		}		
 		
 		[HttpPost("{id}/vote")]
-		public async Task<IActionResult> Vote(VoteViewModel viewModel)
+		public async Task<IActionResult> Vote([FromBody]VoteViewModel viewModel)
 		{
             await _topicVoteCommand.Execute(viewModel);
 			return Ok();

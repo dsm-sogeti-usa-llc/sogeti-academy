@@ -1,19 +1,19 @@
-import {SideNavDirective} from './SideNavDirective';
-import {SideNavController} from './controllers/SideNavController';
+import {SidenavDirective} from './SidenavDirective';
+import {SidenavController} from './controllers/SidenavController';
 
 describe('SideNavDirective', () => {
     let $injector: angular.auto.IInjectorService;
-    let directive: SideNavDirective;
+    let directive: SidenavDirective;
     
     beforeEach(angular.mock.module('sogeti-academy'));
     
     beforeEach(angular.mock.inject((_$injector_) => {
         $injector = _$injector_;    
-        directive = new SideNavDirective();
+        directive = new SidenavDirective();
     }));
     
     it('should register with angular', () => {
-        expect($injector.has('sideNavDirective')).toBeTruthy();
+        expect($injector.has('sidenavDirective')).toBeTruthy();
     });
     
     it('should isolate scope', () => {
@@ -21,14 +21,14 @@ describe('SideNavDirective', () => {
     });
     
     it('should specify controller', () => {
-        expect(directive.controller).toBe(SideNavController);
+        expect(directive.controller).toBe(SidenavController);
     });
     
     it('should specify controller as', () => {
-        expect(directive.controllerAs).toBe('$sideNav');
+        expect(directive.controllerAs).toBe('$sidenav');
     });
     
     it('should specify template', () => {
-        expect(directive.template).toBe(require('./templates/sideNav'));
+        expect(directive.template).toBe(require('./templates/sidenav'));
     })
 });

@@ -81,6 +81,9 @@ module.exports = function (env) {
                 }
             ]
         },
-        plugins: getPlugins(env) 
+        plugins: getPlugins(env),
+        devServer: {
+            port: 8081
+        }
     };
 };

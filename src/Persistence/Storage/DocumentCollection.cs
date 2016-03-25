@@ -45,6 +45,12 @@ namespace Sogeti.Academy.Persistence.Storage
             return JsonConvert.DeserializeObject<T>(doc.ToString());
         }
 
+        public async Task RemoveById(string id)
+        {
+            var document = await GetDocumentById(id);
+            await _client.DeleteDocumentAsync(document.SelfLink);
+        }
+
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             var collection = await GetOrCreateCollection();

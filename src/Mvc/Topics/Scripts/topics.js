@@ -6,9 +6,11 @@
 
             var json = getJson(this);
             $.ajax({
-                url: 'https://api-sogetiacademy.azurewebsites.net/topics',
+                url: '$apiUrl$/topics',
+                contentType:'application/json; charset=UTF-8',
                 method: 'POST',
-                data: json
+                data: JSON.stringify(json),
+                dataType: 'json'
             }).success(function() {
                 location.reload();
             });
@@ -21,9 +23,11 @@
             var id = $(this).attr('id');
             var json = getJson(this);
             $.ajax({
-                url: 'https://api-sogetiacademy.azurewebsites.net/topics/' + id + '/vote',
+                url: '$apiUrl$/topics/' + id + '/vote',
+                contentType:'application/json; charset=UTF-8',
                 method: 'POST',
-                data: json
+                data: JSON.stringify(json),
+                dataType: 'json'
             }).success(function() {
                 location.reload();
             });
