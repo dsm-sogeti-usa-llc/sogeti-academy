@@ -79,7 +79,7 @@ function hideLoading() {
             var json = getJson(this);
             $.ajax({
                 url: 'http://localhost:9000/topics',
-                contentType:'application/json',
+                contentType:'application/json; charset=UTF-8',
                 method: 'POST',
                 data: JSON.stringify(json),
                 dataType: 'json'
@@ -96,7 +96,7 @@ function hideLoading() {
             var json = getJson(this);
             $.ajax({
                 url: 'http://localhost:9000/topics/' + id + '/vote',
-                contentType:'application/json',
+                contentType:'application/json; charset=UTF-8',
                 method: 'POST',
                 data: JSON.stringify(json),
                 dataType: 'json'

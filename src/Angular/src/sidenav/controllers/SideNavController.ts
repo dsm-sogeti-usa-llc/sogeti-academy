@@ -3,9 +3,8 @@ import {INavigationState} from '../../core/INavigationState';
 
 import '../services/SidenavService';
 export class SidenavController {
-    static $inject = ['$mdMedia', '$state', 'SidenavService'];
+    static $inject = ['$mdMedia', '$state', '$mdSidenav', 'SidenavService'];
     
-    isSidenavOpen: boolean;
     get isDockedOpen(): boolean {
         return this.$mdMedia('gt-md');
     }
@@ -19,12 +18,17 @@ export class SidenavController {
     }
     constructor(private $mdMedia: angular.material.IMedia,
         private $state: angular.ui.IStateService,
+        private $mdSidenav: angular.material.ISidenavService,
         private SidenavService: SidenavService) {
         
     }
     
     navigate(state: INavigationState): void {
         this.$state.go(state);
-        this.isSidenavOpen = false;
+        this.$mdSidenav('left').close();
+    }
+    
+    isActive(state: INavigationState): boolean {
+        return this.$state.current === state;
     }
 }

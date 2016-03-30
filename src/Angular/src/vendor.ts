@@ -6,3 +6,4 @@ import 'angular-animate';
 import 'angular-aria';
 import 'angular-material';
 import 'angular-ui-router';
+import 'ng-file-upload';

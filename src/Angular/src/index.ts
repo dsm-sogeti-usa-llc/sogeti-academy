@@ -1,8 +1,18 @@
- import './styles';
+import './styles';
 
-angular.module('sogeti-academy', [
+const app = angular.module('sogeti-academy', [
     'ngMaterial',
-    'ui.router'
+    'ui.router',
+    'ngFileUpload'
 ]);
-
 import './application/ApplicationDirective';
+
+app.config([
+        '$mdThemingProvider',
+        ($mdThemingProvider: angular.material.IThemingProvider) => {
+            $mdThemingProvider.theme('default')
+                .primaryPalette('red', {
+                    default: '900'
+                });
+        }
+    ]);

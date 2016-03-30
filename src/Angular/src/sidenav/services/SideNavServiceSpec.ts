@@ -1,6 +1,7 @@
 import {SidenavService} from './SidenavService';
 import {WelcomeState} from '../../welcome/states/WelcomeState';
 import {TopicsState} from '../../topics/states/TopicsState';
+import {PresentationsState} from '../../presentations/PresentationsState';
 
 describe('SideNavService', () => {
     let sidenavService: SidenavService
@@ -20,4 +21,9 @@ describe('SideNavService', () => {
        const states = sidenavService.getAllStates();
        expect(states.indexOf(TopicsState)).toBeGreaterThan(-1); 
     });
+    
+    it('should include PresentationsState', () => {
+        const states = sidenavService.getAllStates();
+        expect(states.indexOf(PresentationsState)).toBeGreaterThan(-1);
+    })
 });

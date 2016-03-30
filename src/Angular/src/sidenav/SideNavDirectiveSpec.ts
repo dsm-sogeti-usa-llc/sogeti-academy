@@ -30,5 +30,5 @@ describe('SideNavDirective', () => {
     
     it('should specify template', () => {
         expect(directive.template).toBe(require('./templates/sidenav'));
-    })
+    });
 });

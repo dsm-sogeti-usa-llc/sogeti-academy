@@ -1,0 +1,16 @@
+sidenav {
+    ul {
+        padding: 0;
+    }
+    
+    button.md-button {
+        padding: 0 0 0 1em;
+        margin: 0;
+        width: 100%;
+        text-align: left;
+        
+        &.active {
+            background-color: #dddddd;
+        }
+    }
+}

@@ -10,8 +10,9 @@ describe('SidenavController', () => {
 
     beforeEach(angular.mock.module('sogeti-academy'));
 
-    beforeEach(angular.mock.inject((_$controller_, _$mdMedia_, _$state_, _SidenavService_) => {
+    beforeEach(angular.mock.inject((_$controller_, _$mdMedia_, _$state_, _$mdSidenav_, _SidenavService_) => {
         this.$mdMedia = _$mdMedia_;
+        this.$mdSidenav = _$mdSidenav_;
         $state = _$state_;
         sidenavService = _SidenavService_;
 
@@ -19,6 +20,7 @@ describe('SidenavController', () => {
             return _$controller_(SidenavController, {
                 $mdMedia: this.$mdMedia,
                 $state: $state,
+                $mdSidenav: this.$mdSidenav,
                 SidenavService: sidenavService
             });
         };
@@ -60,12 +62,21 @@ describe('SidenavController', () => {
             name: 'bobo'
         };
         spyOn($state, 'go').and.callFake(() => {});
+        
+        const sideNavObject = jasmine.createSpyObj<angular.material.ISidenavObject>('sidenav', ['close']);
+        spyOn(this, '$mdSidenav').and.callFake(() => sideNavObject);
 
         const controller = createController();
-        controller.isSidenavOpen = true;
         controller.navigate(newState);
         
         expect($state.go).toHaveBeenCalledWith(newState);
-        expect(controller.isSidenavOpen).toBeFalsy();
+        expect(sideNavObject.close).toHaveBeenCalled();
+    });
+    
+    it('should be active state', () => {
+       $state.current = WelcomeState;
+       
+       const controller = createController();
+       expect(controller.isActive(WelcomeState)).toBeTruthy();
     });
 });

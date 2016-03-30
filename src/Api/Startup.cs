@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 using Sogeti.Academy.Infrastructure.Startup;
 
 namespace Sogeti.Academy.Api
@@ -19,7 +20,8 @@ namespace Sogeti.Academy.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(o => o.AddPolicy("Default", b => b.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(o => o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
             _startupService.ConfigureServices(services);
         }
 

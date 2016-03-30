@@ -1,5 +1,6 @@
 import {SidenavController} from './controllers/SidenavController';
 
+import './styles/sidenav';
 export class SidenavDirective implements angular.IDirective {
     scope = {};
     controller = SidenavController;

@@ -1,0 +1,17 @@
+<div layout="column" flex>
+    <presentation-list></presentation-list>
+    <md-fab-toolbar class="fixed-fab-toolbar" md-open="$pres.isToolbarOpen" md-direction="left">
+        <md-fab-trigger class="align-with-text">
+            <md-button aria-label="menu" class="md-fab md-primary">
+                <md-icon>menu</md-icon>
+            </md-button>
+        </md-fab-trigger>
+        <md-toolbar>
+            <md-fab-actions class="md-toolbar-tools">
+                <md-button ng-click="$pres.addPresentation()" aria-label="Add Presentation" class="md-icon-button">
+                    <md-icon>add</md-icon>
+                </md-button>
+            </md-fab-actions>
+        </md-toolbar>
+    </md-fab-toolbar>
+</div>

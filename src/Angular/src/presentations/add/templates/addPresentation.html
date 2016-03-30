@@ -1,0 +1,37 @@
+<md-dialog aria-label="Add Presentation">
+    <ng-form name="$add.form" >
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Add Presentation</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="$add.cancel()" ng-disabled="$add.isSaving">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-input-container ng-hide="$add.isSaving">
+                    <label>Topic</label>
+                    <input ng-model="$add.topic" type="text" required md-autofocus ng-disabled="$add.isSaving" />
+                </md-input-container>
+                <md-input-container ng-hide="$add.isSaving">
+                    <label>Description</label>
+                    <input ng-model="$add.description" type="text" ng-disabled="$add.isSaving" />
+                </md-input-container>
+                
+                <div layout="row" layout-align="space-around" ng-show="$add.isSaving">
+                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row" layout-align="end center">
+            <md-button ng-click="$add.save()" ng-disabled="$add.isSaving || !$add.canSave">
+                Save
+            </md-button>
+            <md-button ng-click="$add.cancel()" ng-disabled="$add.isSaving">
+                Cancel
+            </md-button>
+        </md-dialog-actions>
+    </ng-form>
+</md-dialog>

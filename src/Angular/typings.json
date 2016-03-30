@@ -8,6 +8,7 @@
     "es6-promise": "registry:dt/es6-promise#0.0.0+20160221190517",
     "jasmine": "registry:dt/jasmine#2.2.0+20160308082659",
     "jquery": "registry:dt/jquery#1.10.0+20160303223636",
+    "ng-file-upload": "registry:dt/ng-file-upload#0.0.0+20160317120654",
     "node": "registry:dt/node#4.0.0+20160311162451",
     "source-map": "registry:dt/source-map#0.0.0+20151201114758",
     "uglify-js": "registry:dt/uglify-js#2.6.1+20160106153543",
