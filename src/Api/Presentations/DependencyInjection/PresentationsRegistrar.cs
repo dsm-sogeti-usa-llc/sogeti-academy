@@ -4,6 +4,8 @@ using Sogeti.Academy.Application.Presentations.Commands.Add;
 using Sogeti.Academy.Application.Presentations.Commands.Edit;
 using Sogeti.Academy.Application.Presentations.Commands.Remove;
 using Sogeti.Academy.Application.Presentations.Factories;
+using Sogeti.Academy.Application.Presentations.Queries.GetDetail;
+using Sogeti.Academy.Application.Presentations.Queries.GetFile;
 using Sogeti.Academy.Application.Presentations.Queries.GetList;
 using Sogeti.Academy.Application.Presentations.Storage;
 using Sogeti.Academy.Infrastructure.DependencyInjection;
@@ -22,6 +24,8 @@ namespace Sogeti.Academy.Api.Presentations.DependencyInjection
             services.AddTransient<IEditPresentationCommand, EditPresentationCommand>();
             services.AddTransient<IRemovePresentationCommand, RemovePresentationCommand>();
             services.AddTransient<IGetListQuery, GetListQuery>();
+            services.AddTransient<IGetDetailQuery, GetDetailQuery>();
+            services.AddTransient<IGetFileQuery, GetFileQuery>();
         }
     }
 }

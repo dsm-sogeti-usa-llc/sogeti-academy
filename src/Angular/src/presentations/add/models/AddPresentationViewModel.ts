@@ -1,7 +1,6 @@
-import {AddFileViewModel} from './AddFileViewModel';
-
 export interface AddPresentationViewModel {
+    id?: string;
     topic: string;
     description: string;
-    files?: AddFileViewModel[];
+    files?: File[];
 }

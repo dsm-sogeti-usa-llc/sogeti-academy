@@ -7,6 +7,7 @@ export class AddPresentationController {
     
     topic: string;
     description: string;
+    files: File[];
     form: angular.IFormController;
     isSaving: boolean;
     
@@ -17,7 +18,7 @@ export class AddPresentationController {
     
     constructor(private $mdDialog: angular.material.IDialogService,
         private addPresentationService: AddPresentationService) {
-        
+        this.files = [];
     }
     
     cancel(): void {
@@ -31,11 +32,23 @@ export class AddPresentationController {
         this.isSaving = true;
         const viewModel: AddPresentationViewModel = {
             topic: this.topic,
-            description: this.description
+            description: this.description,
+            files: this.files
         };
-        this.addPresentationService.save(viewModel).then(() => {
-            this.$mdDialog.hide();
+        this.addPresentationService.save(viewModel).then((id) => {
+            viewModel.id = id;
+            this.$mdDialog.hide(viewModel);
             this.isSaving = false;
         });
+    }
+    
+    selectFiles(files: File[]): void {
+        this.files = files;
+    }
+    
+    removeFile(file: File): void {
+        const index = this.files.indexOf(file);
+        if (index > -1) 
+            this.files.splice(index, 1);
     }
 }

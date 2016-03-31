@@ -5,6 +5,8 @@ using Sogeti.Academy.Application.Presentations.Commands.Add;
 using Sogeti.Academy.Application.Presentations.Commands.Edit;
 using Sogeti.Academy.Application.Presentations.Commands.Remove;
 using Sogeti.Academy.Application.Presentations.Factories;
+using Sogeti.Academy.Application.Presentations.Queries.GetDetail;
+using Sogeti.Academy.Application.Presentations.Queries.GetFile;
 using Sogeti.Academy.Application.Presentations.Queries.GetList;
 using Sogeti.Academy.Application.Presentations.Storage;
 using Sogeti.Academy.Persistence.Presentations.Storage;
@@ -79,6 +81,22 @@ namespace Sogeti.Academy.Api.Test.Presentations.DependencyInjection
         {
             Register();
             var descriptor = _services.GetDescriptor<IGetListQuery, GetListQuery>();
+            Assert.NotNull(descriptor);
+        }
+
+        [Fact]
+        public void ReigsterServices_ShouldRegisterGetDetailQuery()
+        {
+            Register();
+            var descriptor = _services.GetDescriptor<IGetDetailQuery, GetDetailQuery>();
+            Assert.NotNull(descriptor);
+        }
+
+        [Fact]
+        public void RegisterServices_ShouldRegisterGetFileQuery()
+        {
+            Register();
+            var descriptor = _services.GetDescriptor<IGetFileQuery, GetFileQuery>();
             Assert.NotNull(descriptor);
         }
 

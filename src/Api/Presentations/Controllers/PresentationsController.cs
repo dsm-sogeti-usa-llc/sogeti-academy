@@ -1,6 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
+using Sogeti.Academy.Api.Presentations.ModelBinders;
 using Sogeti.Academy.Application.Presentations.Commands.Add;
 using Sogeti.Academy.Application.Presentations.Commands.Edit;
 using Sogeti.Academy.Application.Presentations.Commands.Remove;
@@ -52,7 +56,7 @@ namespace Sogeti.Academy.Api.Presentations.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> Add(AddPresentationViewModel viewModel)
+        public async Task<IActionResult> Add([ModelBinder(BinderType = typeof(AddPresentationViewModelBinder))] AddPresentationViewModel viewModel)
         {
             var id = await _addPresentationCommand.Execute(viewModel);
             return Ok(id);

@@ -1,5 +1,7 @@
 import {AddPresentationController} from './AddPresentationController';
 import {AddPresentationService} from '../services/AddPresentationService';
+import {AddPresentationViewModel} from '../models/AddPresentationViewModel';
+import {createFile} from '../../../createFile';
 
 import '../services/AddPresentationService';
 describe('AddPresentationController', () => {
@@ -27,7 +29,9 @@ describe('AddPresentationController', () => {
 
     it('should save add presentation view model', (done) => {
         let savePromise: Promise<string>;
-        spyOn(addPresentationService, 'save').and.callFake(() => {
+        let savedViewModel: AddPresentationViewModel;
+        spyOn(addPresentationService, 'save').and.callFake((saved) => {
+            savedViewModel = angular.copy<AddPresentationViewModel>(saved);
             savePromise = Promise.resolve('something');
             return savePromise;
         });
@@ -36,13 +40,17 @@ describe('AddPresentationController', () => {
 
         controller.topic = 'one';
         controller.description = 'two';
+        controller.files = [createFile(), createFile(), createFile()];
+        
         form.$valid = true;
         controller.save();
         expect(controller.isSaving).toBeTruthy();
         savePromise.then(() => {
-            expect(addPresentationService.save).toHaveBeenCalledWith({
+            expect(addPresentationService.save).toHaveBeenCalled();
+            expect(savedViewModel).toEqual({
                 topic: 'one',
-                description: 'two'
+                description: 'two',
+                files: controller.files
             });
             expect(controller.isSaving).toBeFalsy();
             done();
@@ -62,17 +70,24 @@ describe('AddPresentationController', () => {
     it('should close modal when save finishes', (done) => {
         let savePromise: Promise<string>;
         spyOn(addPresentationService, 'save').and.callFake(() => {
-            savePromise = Promise.resolve('something');
+            savePromise = Promise.resolve('someId');
             return savePromise;
         });
         spyOn($mdDialog, 'hide').and.callThrough();
 
         const controller = createController();
         form.$valid = true;
+        controller.topic = 'something';
+        controller.description = 'desc something';
 
         controller.save();
         savePromise.then(() => {
-            expect($mdDialog.hide).toHaveBeenCalled();
+            expect($mdDialog.hide).toHaveBeenCalledWith({
+                id: 'someId',
+                topic: 'something',
+                description: 'desc something',
+                files: []
+            });
             done();
         });
     });
@@ -99,5 +114,32 @@ describe('AddPresentationController', () => {
         const controller = createController();
         controller.form = undefined;
         expect(controller.canSave).toBeFalsy();
-    })
+    });
+    
+    it('should set files', () => {
+        const files: File[] = [
+            createFile(),
+            createFile(),
+            createFile()
+        ];
+        
+        const controller = createController();
+        controller.selectFiles(files);
+        expect(controller.files.length).toBe(files.length);
+    });
+    
+    it('should remove file from files', () => {
+        const files: File[] = [
+            createFile(),
+            createFile(),
+            createFile()
+        ];
+        
+        const controller = createController();
+        controller.selectFiles(files);
+        
+        const removedFile = files[2];
+        controller.removeFile(removedFile);
+        expect(controller.files.indexOf(removedFile)).toBe(-1);
+    });
 })

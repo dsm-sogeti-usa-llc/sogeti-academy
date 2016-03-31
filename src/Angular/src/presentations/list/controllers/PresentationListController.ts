@@ -1,5 +1,6 @@
 import {Presentation} from '../models/Presentation';
 import {PresentationListService} from '../services/PresentationListService';
+import {AddPresentationViewModel} from '../../add/models/AddPresentationViewModel';
 
 import '../services/PresentationListService';
 export class PresentationListController {
@@ -12,11 +13,20 @@ export class PresentationListController {
     
     constructor(private $scope: angular.IScope,
         private presentationListService: PresentationListService) {
-        
+        this._presentations = [];
         this.presentationListService.getPresentations().then((pres) => {
-            this.$scope.$applyAsync(() => {
-                this._presentations = pres;
-            })
-        })        
+            this.$scope.$applyAsync(() => this._presentations.push(...pres));
+        });
+        
+        this.$scope.$on('$presentation-added', (evt, value) => this.handlePresentationAdded(value));        
+    }
+    
+    private handlePresentationAdded(viewModel: AddPresentationViewModel): void {
+        this._presentations.push({
+            description: viewModel.description,
+            filesCount: viewModel.files.length,
+            id: viewModel.id,
+            topic: viewModel.topic
+        });
     }
 }

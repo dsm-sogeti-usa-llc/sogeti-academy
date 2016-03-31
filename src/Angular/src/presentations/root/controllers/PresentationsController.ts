@@ -1,7 +1,8 @@
 export class PresentationsController {
-    static $inject = ['$mdDialog'];
+    static $inject = ['$rootScope', '$mdDialog'];
     
-    constructor(private $mdDialog: angular.material.IDialogService) {
+    constructor(private $rootScope: angular.IRootScopeService,
+        private $mdDialog: angular.material.IDialogService) {
         
     }
     
@@ -13,6 +14,7 @@ export class PresentationsController {
             hasBackdrop: true,
             template: '<add-presentation></add-presentation>'
         };
-        this.$mdDialog.show(options);    
+        this.$mdDialog.show(options)
+            .then((viewModel) => this.$rootScope.$broadcast('$presentation-added', viewModel));    
     }
 }
