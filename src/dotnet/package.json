@@ -1,0 +1,33 @@
+{
+  "name": "sogeti-academy.dotnet",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "start npm run start:api & start npm run start:mvc",
+    "start:api": "cd .\\src\\Api & dnx web",
+    "start:mvc": "cd .\\src\\Mvc & dnx web",
+
+    "test": "npm run test:api & npm run test:application & npm run test:infrastructure & npm run test:mvc & npm run test:persistence",
+    "test:api": "cd .\\test\\Api.Test & dnx test",
+    "test:application": "cd .\\test\\Application.Test & dnx test",
+    "test:infrastructure": "cd .\\test\\Infrastructure.Test & dnx test",
+    "test:mvc": "cd .\\test\\Mvc.Test & dnx test",
+    "test:persistence": "cd .\\test\\Persistence.Test & dnx test",
+
+    "install": "npm run install:src & npm run install:test",
+    "install:src": "npm run install:api & npm run install:application & npm run install:infrastructure & npm run install:persistence & npm run install:mvc",
+    "install:test": "npm run install:api:test & npm run install:application:test & npm run install:infrastructure:test & npm run install:persistence:test & npm run install:mvc:test & npm run install:test:infrastructure",
+    "install:api": "cd .\\src\\Api & dnu restore",
+    "install:api:test": "cd .\\test\\Api.Test & dnu restore",
+    "install:application": "cd .\\src\\Application & dnu restore",
+    "install:application:test": "cd .\\test\\Application.Test & dnu restore",
+    "install:infrastructure": "cd .\\src\\Infrastructure & dnu restore",
+    "install:infrastructure:test": "cd .\\test\\Infrastructure.Test & dnu restore",
+    "install:persistence": "cd .\\src\\Persistence & dnu restore",
+    "install:persistence:test": "cd .\\test\\Persistence.Test & dnu restore",
+    "install:mvc": "cd .\\src\\Mvc & dnu restore",
+    "install:mvc:test": "cd .\\test\\Mvc.Test & dnu restore",
+    "install:test:infrastructure": "cd .\\test\\Test.Infrastructure & dnu restore"
+  },
+  "author": "Sogeti USA, LLC",
+  "license": "MIT"
+}
