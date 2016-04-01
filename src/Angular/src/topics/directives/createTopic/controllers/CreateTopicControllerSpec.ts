@@ -65,16 +65,16 @@ describe('CreateTopicController', () => {
         form.$valid = true;
         
         const controller = createController();
-        controller.topic.Name = 'my Name';
+        controller.topic.name = 'my Name';
         
         controller.save();
         expect(controller.isSaving).toBeTruthy();
         createTopicPromise.then(id => {
             expect(controller.isSaving).toBeFalsy();
             expect($mdDialog.hide).toHaveBeenCalledWith({
-                Name: 'my Name',
-                Id: id,
-                Votes: 0   
+                name: 'my Name',
+                id: id,
+                votes: 0   
             });
             done();
         });

@@ -2,6 +2,7 @@ import {PresentationsController} from './controllers/PresentationsController';
 
 import '../list/PresentationListDirective';
 import '../add/AddPresentationDirective';
+import '../detail/PresentationDetailDirective';
 export class PresentationsDirective implements angular.IDirective {
     scope = {};
     controller = PresentationsController;

@@ -52,7 +52,7 @@ describe('TopicsController', () => {
     });
 
     it('should add created topic to topics', (done) => {
-        const newTopic: Topic = { Name: '2342', Votes: 0 };
+        const newTopic: Topic = { name: '2342', votes: 0 };
         spyOn($mdDialog, 'show').and.callFake(() => $q.resolve(newTopic));
 
         const controller = createController();
@@ -68,9 +68,9 @@ describe('TopicsController', () => {
     it('should get topics', (done) => {
         spyOn($scope, '$apply').and.callThrough();
 
-        topics.push({ Name: 'one', Votes: 4 });
-        topics.push({ Name: 'two', Votes: 24 });
-        topics.push({ Name: 'three', Votes: 41 });
+        topics.push({ name: 'one', votes: 4 });
+        topics.push({ name: 'two', votes: 24 });
+        topics.push({ name: 'three', votes: 41 });
 
         const controller = createController();
         topicsPromise.then(() => {
@@ -87,7 +87,7 @@ describe('TopicsController', () => {
             return $q.resolve();
         });
 
-        const topic: Topic = { Id: 'not now', Name: 'something', Votes: 6 };
+        const topic: Topic = { id: 'not now', name: 'something', votes: 6 };
         const controller = createController();
         controller.voteForTopic(topic);
 
@@ -105,12 +105,12 @@ describe('TopicsController', () => {
            return $q.resolve(); 
         });
         
-        const topic: Topic = { Name: 'something', Votes: 5 };
+        const topic: Topic = { name: 'something', votes: 5 };
         const controller = createController();
         
         controller.voteForTopic(topic);
         $scope.$digest();
         
-        expect(topic.Votes).toBe(6);
+        expect(topic.votes).toBe(6);
     });
 })

@@ -25,7 +25,7 @@ export class VoteForTopicController {
     }
     
     save(): void {
-        const vote: Vote = { email: this.email, topicId: this.topic.Id };
+        const vote: Vote = { email: this.email, topicId: this.topic.id };
         this.isSaving = true;
         this.topicsService.voteForTopic(vote).then(() => {
             this.$mdDialog.hide(true);

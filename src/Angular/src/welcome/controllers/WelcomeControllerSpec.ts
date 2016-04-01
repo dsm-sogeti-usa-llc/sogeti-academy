@@ -1,5 +1,5 @@
 import {WelcomeController} from './WelcomeController';
-import {TopicsState} from '../../topics/states/TopicsState';
+import {TopicsState} from '../../topics/TopicsState';
 
 describe('WelcomeController', () => {
     let createController: () => WelcomeController;

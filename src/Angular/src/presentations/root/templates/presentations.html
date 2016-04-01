@@ -1,5 +1,8 @@
-<div layout="column" flex>
-    <presentation-list></presentation-list>
+<div layout="row" layout-gt-md="column" flex>
+    <presentation-list >
+    </presentation-list>
+    <div layout-fill ui-view>
+    </div>
     <md-fab-toolbar class="fixed-fab-toolbar" md-open="$pres.isToolbarOpen" md-direction="left">
         <md-fab-trigger class="align-with-text">
             <md-button aria-label="menu" class="md-fab md-primary">

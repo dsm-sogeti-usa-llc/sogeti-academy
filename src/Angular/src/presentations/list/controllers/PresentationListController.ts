@@ -1,10 +1,11 @@
 import {Presentation} from '../models/Presentation';
 import {PresentationListService} from '../services/PresentationListService';
 import {AddPresentationViewModel} from '../../add/models/AddPresentationViewModel';
+import {PresentationDetailState} from '../../detail/PresentationDetailState';
 
 import '../services/PresentationListService';
 export class PresentationListController {
-    static $inject = ['$scope', 'PresentationListService'];
+    static $inject = ['$scope', '$state', 'PresentationListService'];
     private _presentations: Presentation[];
     
     get presentations(): Presentation[] {
@@ -12,6 +13,7 @@ export class PresentationListController {
     }
     
     constructor(private $scope: angular.IScope,
+        private $state: angular.ui.IStateService,
         private presentationListService: PresentationListService) {
         this._presentations = [];
         this.presentationListService.getPresentations().then((pres) => {
@@ -19,6 +21,12 @@ export class PresentationListController {
         });
         
         this.$scope.$on('$presentation-added', (evt, value) => this.handlePresentationAdded(value));        
+    }
+    
+    goToDetail(presentation: Presentation): void {
+        this.$state.go(PresentationDetailState, {
+            id: presentation.id
+        });
     }
     
     private handlePresentationAdded(viewModel: AddPresentationViewModel): void {

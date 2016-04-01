@@ -5,7 +5,8 @@ export const PresentationsState: INavigationState = {
     name: 'presentations',
     url: '/presentations',
     template: '<presentations></presentations>',
-    title: 'Presentations'
+    title: 'Presentations',
+    order: 3
 };
 
 angular.module('sogeti-academy')

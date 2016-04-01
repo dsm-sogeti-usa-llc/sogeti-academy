@@ -41,6 +41,6 @@ export class TopicsController {
             scope: dialogScope
         };
         this.$mdDialog.show(options)
-            .then(() => topic.Votes++);
+            .then(() => topic.votes++);
     }
 }

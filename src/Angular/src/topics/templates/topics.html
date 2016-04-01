@@ -1,8 +1,8 @@
 <div layout="column" flex>
     <md-list>
         <md-list-item ng-repeat="topic in $topics.topics">
-            <md-icon class="vote-count">{{topic.Votes}}</md-icon>
-            <p>{{topic.Name}}</p>
+            <md-icon class="vote-count">{{topic.votes}}</md-icon>
+            <p>{{topic.name}}</p>
             <md-button ng-click="$topics.voteForTopic(topic)" class="md-icon-button md-primary">
                 <md-icon>add</md-icon>
             </md-button>

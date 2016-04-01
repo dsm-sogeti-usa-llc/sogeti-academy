@@ -27,5 +27,9 @@ describe('PresentationsState', () => {
     
     it('should specify title', () => {
         expect(PresentationsState.title).toBe('Presentations');
+    });
+    
+    it('should specify order', () => {
+        expect(PresentationsState.order).toBe(3);
     })
 })

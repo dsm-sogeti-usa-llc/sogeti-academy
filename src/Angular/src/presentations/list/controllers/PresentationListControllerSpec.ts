@@ -2,10 +2,12 @@ import {Presentation} from '../models/Presentation';
 import {PresentationListController} from './PresentationListController';
 import {PresentationListService} from '../services/PresentationListService';
 import {AddPresentationViewModel} from '../../add/models/AddPresentationViewModel';
+import {PresentationDetailState} from '../../detail/PresentationDetailState';
 import {createFile} from '../../../createFile';
 
 describe('PresentationListController', () => {
     let $scope: angular.IScope;
+    let $state: angular.ui.IStateService;
     let $rootScope: angular.IRootScopeService;
     let presenationListService: PresentationListService;
     let presentations: Presentation[]; 
@@ -14,7 +16,8 @@ describe('PresentationListController', () => {
     
     beforeEach(angular.mock.module('sogeti-academy'));
     
-    beforeEach(angular.mock.inject((_$controller_, _$rootScope_, _PresentationListService_) => {
+    beforeEach(angular.mock.inject((_$controller_, _$rootScope_, _$state_, _PresentationListService_) => {
+        $state = _$state_;
         $rootScope = _$rootScope_;
         $scope = _$rootScope_.$new();
         
@@ -66,6 +69,23 @@ describe('PresentationListController', () => {
             topic: viewModel.topic,
             description: viewModel.description,
             filesCount: viewModel.files.length
-        })
+        });
     });
+    
+    it('should go to detail', () => {
+        spyOn($state, 'go').and.callFake(() => {});
+        
+        const viewModel: Presentation = {
+            id: 'somethingid',
+            topic: 'not good',
+            description: 'des',
+            filesCount: 5  
+        };
+        
+        const controller = createController();
+        controller.goToDetail(viewModel);
+        expect($state.go).toHaveBeenCalledWith(PresentationDetailState, {
+            id: viewModel.id
+        });
+    })
 });

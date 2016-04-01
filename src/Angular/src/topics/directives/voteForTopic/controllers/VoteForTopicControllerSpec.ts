@@ -16,7 +16,7 @@ describe('VoteForTopicController', () => {
         $mdDialog = _$mdDialog_;
         topicsService = _TopicsService_;
         form = jasmine.createSpyObj<angular.IFormController>('form', ['$valid']);
-        topic = { Name: 'Top', Votes: 5, Id: 'asdgsad' };
+        topic = { name: 'Top', votes: 5, id: 'asdgsad' };
 
         createController = () => {
             return _$controller_(VoteForTopicController, {
@@ -37,7 +37,7 @@ describe('VoteForTopicController', () => {
     it('should have topic name', () => {
         const controller = createController();
         controller.topic = topic;
-        expect(controller.topic.Name).toBe(topic.Name);
+        expect(controller.topic.name).toBe(topic.name);
     });
 
     it('should vote for topic', (done) => {
@@ -56,7 +56,7 @@ describe('VoteForTopicController', () => {
         expect(controller.isSaving).toBeTruthy();
         voteForTopicPromise.then(() => {
             expect(controller.isSaving).toBeFalsy();
-            expect(topicsService.voteForTopic).toHaveBeenCalledWith({ topicId: topic.Id, email: controller.email });
+            expect(topicsService.voteForTopic).toHaveBeenCalledWith({ topicId: topic.id, email: controller.email });
             expect($mdDialog.hide).toHaveBeenCalledWith(true);
             done();
         });

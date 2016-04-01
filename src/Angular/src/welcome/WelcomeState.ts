@@ -1,12 +1,13 @@
-import {INavigationState} from '../../core/INavigationState';
+import {INavigationState} from '../core/INavigationState';
 
-import '../WelcomeDirective';
+import './WelcomeDirective';
 export const WelcomeState: INavigationState = {
     title: 'Welcome',
     name: 'welcome',
     url: '/welcome',
     template: '<welcome></welcome>',
-    isDefault: true
+    isDefault: true,
+    order: 1
 };
 
 angular.module('sogeti-academy')

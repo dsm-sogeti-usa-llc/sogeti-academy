@@ -1,4 +1,5 @@
 import './styles';
+import './core/array/quickSort';
 
 const app = angular.module('sogeti-academy', [
     'ngMaterial',

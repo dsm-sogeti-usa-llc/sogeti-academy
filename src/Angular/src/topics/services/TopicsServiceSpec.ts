@@ -19,12 +19,12 @@ describe('TopicsService', () => {
     it('should get topics from api', (done) => {
         const url = `${configService.apiUrl}/topics`;
         const topics: Topic[] = [
-            { Name: 'one', Votes: 1 },
-            { Name: 'two', Votes: 0 },
-            { Name: 'three', Votes: -1 }
+            { name: 'one', votes: 1 },
+            { name: 'two', votes: 0 },
+            { name: 'three', votes: -1 }
         ];
         $httpBackend.expectGET(url).respond({
-            Topics: topics
+            topics: topics
         });
         
         topicsService.getAll().then((actual: Topic[]) => {
@@ -37,7 +37,7 @@ describe('TopicsService', () => {
     it('should create topic in api', (done) => {
         const url = `${configService.apiUrl}/topics`;
         const id = 'gasdfsad;flk';
-        const topic = {Name: 'something', Votes: 0 };
+        const topic: Topic = {name: 'something', votes: 0 };
         
         $httpBackend.expectPOST(url, topic).respond(id);
         

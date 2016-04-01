@@ -1,5 +1,5 @@
 export interface Topic {
-    Id?: string;
-    Name: string;
-    Votes: number;
+    id?: string;
+    name: string;
+    votes: number;
 }

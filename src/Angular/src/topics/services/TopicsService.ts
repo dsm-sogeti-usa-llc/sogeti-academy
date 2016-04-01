@@ -16,7 +16,7 @@ export class TopicsService {
             const url = `${this._apiUrl}/topics`;
             this.$http.get(url)
                 .then(
-                    (response: angular.IHttpPromiseCallbackArg<any>) => resolve(response.data.Topics)
+                    (response: angular.IHttpPromiseCallbackArg<any>) => resolve(response.data.topics)
                 );
         });
     }

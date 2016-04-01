@@ -33,5 +33,9 @@ describe('WelcomeState', () => {
     
     it('should be default', () => {
         expect(WelcomeState.isDefault).toBeTruthy();
+    });
+    
+    it('should specify order', () => {
+        expect(WelcomeState.order).toBe(1);
     })
 });

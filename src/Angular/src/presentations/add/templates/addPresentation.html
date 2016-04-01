@@ -17,14 +17,14 @@
                 </md-input-container>
                 <md-input-container ng-hide="$add.isSaving">
                     <label>Description</label>
-                    <input ng-model="$add.description" type="text" ng-disabled="$add.isSaving" />
+                    <textarea ng-model="$add.description" rows="5" ng-disabled="$add.isSaving"></textarea>
                 </md-input-container>
                 
                 <md-button ng-hide="$add.isSaving" ng-disabled="$add.isSaving" ngf-multiple="true" ngf-select="$add.selectFiles($files)">
                     Select files
                 </md-button>
                 
-                <md-list ng-hide="$add.isSaving" md-scroll-y>
+                <md-list ng-hide="$add.isSaving">
                     <md-list-item class="secondary-button-padding" ng-repeat="file in $add.files">
                         <h4>{{file.name}}</h4>
                         <md-button class="md-icon-button md-secondary" ng-click="$add.removeFile(file)" ng-disabled="$add.isSaving" >

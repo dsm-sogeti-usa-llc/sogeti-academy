@@ -15,7 +15,7 @@ export class CreateTopicController {
     
     constructor(private $mdDialog: angular.material.IDialogService,
         private topicsService: TopicsService) {
-        this.topic = { Name: '', Votes: 0 };
+        this.topic = { name: '', votes: 0 };
     }
     
     cancel(): void {
@@ -28,7 +28,7 @@ export class CreateTopicController {
         
         this.isSaving = true;
         this.topicsService.createTopic(this.topic).then((id) => {
-            this.topic.Id = id;
+            this.topic.id = id;
             this.$mdDialog.hide(this.topic);
             this.isSaving = false;
         });

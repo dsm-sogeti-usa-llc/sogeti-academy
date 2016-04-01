@@ -1,7 +1,7 @@
 import {SidenavController} from './SidenavController';
 import {SidenavService} from '../services/SidenavService';
 import {INavigationState} from '../../core/INavigationState';
-import {WelcomeState} from '../../welcome/states/WelcomeState';
+import {WelcomeState} from '../../welcome/WelcomeState';
 
 describe('SidenavController', () => {
     let $state: angular.ui.IStateService;

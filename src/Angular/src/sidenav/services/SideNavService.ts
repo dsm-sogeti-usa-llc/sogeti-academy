@@ -1,6 +1,6 @@
 import {INavigationState} from '../../core/INavigationState';
 
-function map(obj: Object) {
+function map(obj: Object): INavigationState {
     for(let prop in obj) {
         if(obj.hasOwnProperty(prop)) {
             return obj[prop];
@@ -10,10 +10,14 @@ function map(obj: Object) {
     return obj;
 }
 const context = (<any>require).context('../..', true, /State$/);
-const states = context.keys().map(context).map(map).filter(s => s.title !== undefined);
+const states = context.keys().map(context)
+    .map(map)
+    .filter(s => s !== undefined)
+    .filter(s => s.title !== undefined)
+    .filter(s => s.parent === undefined);
 export class SidenavService {
     getAllStates(): INavigationState[] {
-        return states;
+        return states.quickSort(s => s.order);
     }
 }
 

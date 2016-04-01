@@ -1,11 +1,12 @@
-import {INavigationState} from '../../core/INavigationState';
+import {INavigationState} from '../core/INavigationState';
 
-import '../TopicsDirective';
+import './TopicsDirective';
 export const TopicsState: INavigationState = {
     name: 'topics',
     url: '/topics',
     template: '<topics></topics>',
-    title: 'Topics'
+    title: 'Topics',
+    order: 2
 }
 
 angular.module('sogeti-academy')
