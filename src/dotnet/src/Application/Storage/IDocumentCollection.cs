@@ -5,7 +5,7 @@ using Sogeti.Academy.Infrastructure.Models;
 
 namespace Sogeti.Academy.Application.Storage
 {
-    public interface IDocumentCollection<T> : IDisposable where T : IModel<string>
+    public interface IDocumentCollection<T> where T : IModel<string>
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<string> CreateAsync(T item);

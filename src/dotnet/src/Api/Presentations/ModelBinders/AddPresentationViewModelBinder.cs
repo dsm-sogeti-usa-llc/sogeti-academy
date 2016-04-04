@@ -15,7 +15,7 @@ namespace Sogeti.Academy.Api.Presentations.ModelBinders
             return ModelBindingResult.Success(bindingContext.FieldName, viewModel);
         }
 
-        private async Task<AddPresentationViewModel> MapToViewModel(IFormCollection formCollection)
+        private static async Task<AddPresentationViewModel> MapToViewModel(IFormCollection formCollection)
         {
             return new AddPresentationViewModel
             {
@@ -25,23 +25,10 @@ namespace Sogeti.Academy.Api.Presentations.ModelBinders
             };
         }
 
-        private async Task<AddFileViewModel[]> MapFilesToViewModels(IFormCollection formColletion)
+        private static async Task<AddFileViewModel[]> MapFilesToViewModels(IFormCollection formCollection)
         {
-            var viewModelTasks = formColletion.Files.Select(MapFileToViewModel);
-            var viewModels = await Task.WhenAll(viewModelTasks);
-            return viewModels;
-        }
-
-        private async Task<AddFileViewModel> MapFileToViewModel(IFormFile file)
-        {
-            var bytes = new byte[file.Length];
-            await file.OpenReadStream().ReadAsync(bytes, 0, (int)file.Length);
-            return new AddFileViewModel
-            {
-                Type = file.ContentType,
-                Bytes = bytes,
-                Name = file.GetFilename()
-            };
+            var tasks = formCollection.Files.Select(f => f.AsViewModel<AddFileViewModel>());
+            return await Task.WhenAll(tasks);
         }
     }
 }

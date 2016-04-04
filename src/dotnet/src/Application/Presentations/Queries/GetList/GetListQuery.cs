@@ -6,7 +6,7 @@ using Sogeti.Academy.Application.Presentations.Storage;
 
 namespace Sogeti.Academy.Application.Presentations.Queries.GetList
 {
-    public interface IGetListQuery : IDisposable
+    public interface IGetListQuery 
     {
         Task<ListViewModel> Execute();
     }
@@ -42,9 +42,5 @@ namespace Sogeti.Academy.Application.Presentations.Queries.GetList
             };
         }
 
-        public void Dispose()
-        {
-            _presentationContext.Dispose();
-        }
     }
 }

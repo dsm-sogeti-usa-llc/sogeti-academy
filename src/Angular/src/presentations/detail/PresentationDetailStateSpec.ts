@@ -24,7 +24,11 @@ describe('PresentationDetailState', () => {
     
     it('should specify parent', () => {
         expect(PresentationDetailState.parent).toBe(PresentationsState.name);
-    })
+    });
+    
+    it('should specify title', () => {
+        expect(PresentationDetailState.title).toBe('Presentations');
+    });
     
     it('should register state', () => {
         expect($state.get(PresentationDetailState)).toEqual(PresentationDetailState);

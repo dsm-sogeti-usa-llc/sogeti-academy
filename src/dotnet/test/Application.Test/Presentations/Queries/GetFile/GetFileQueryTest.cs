@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Moq;
 using Sogeti.Academy.Application.Presentations.Models;
@@ -7,28 +8,30 @@ using Sogeti.Academy.Application.Presentations.Queries.GetFile;
 using Sogeti.Academy.Application.Presentations.Storage;
 using Sogeti.Academy.Application.Storage;
 using Xunit;
+using File = Sogeti.Academy.Application.Presentations.Models.File;
 
 namespace Application.Test.Presentations.Queries.GetFile
 {
     public class GetFileQueryTest
     {
         private readonly Mock<IDocumentCollection<Presentation>> _presentationCollectionMock;
-        private readonly Mock<IPresentationContext> _presentationsContextMock;
         private readonly GetFileQuery _getFileQuery;
 
         public GetFileQueryTest()
         {
             _presentationCollectionMock = new Mock<IDocumentCollection<Presentation>>();
-            _presentationsContextMock = new Mock<IPresentationContext>();
-            _presentationsContextMock.Setup(s => s.GetCollection<Presentation>()).Returns(_presentationCollectionMock.Object);
+            var presentationsContextMock = new Mock<IPresentationContext>();
+            presentationsContextMock.Setup(s => s.GetCollection<Presentation>()).Returns(_presentationCollectionMock.Object);
 
-            _getFileQuery = new GetFileQuery(_presentationsContextMock.Object);
+            _getFileQuery = new GetFileQuery(presentationsContextMock.Object);
         }
 
         [Fact]
         public async Task Execute_ShouldGetFile()
         {
             var presentationId = Guid.NewGuid().ToString();
+
+            var expectedBytes = new byte[] {1, 8, 76, 13};
             var presentation = new Presentation
             {
                 Id = Guid.NewGuid().ToString(),
@@ -38,9 +41,9 @@ namespace Application.Test.Presentations.Queries.GetFile
                     new File
                     {
                         Id = Guid.NewGuid().ToString(),
-                        Bytes = new byte[] {4, 5,6,7,8,2},
                         Name = "Job",
-                        Type = "Nope"
+                        Type = "Nope",
+                        Bytes = expectedBytes
                     },
                     new File()
                 }
@@ -52,14 +55,7 @@ namespace Application.Test.Presentations.Queries.GetFile
             Assert.Equal(presentation.Files[1].Id, viewModel.FileId);
             Assert.Equal(presentation.Files[1].Name, viewModel.Name);
             Assert.Equal(presentation.Files[1].Type, viewModel.Type);
-            Assert.Equal(presentation.Files[1].Bytes, viewModel.Bytes);
-        }
-
-        [Fact]
-        public void Dispose_ShouldDisposeContext()
-        {
-            _getFileQuery.Dispose();
-            _presentationsContextMock.Verify(s => s.Dispose(), Times.Once());
+            Assert.Equal(expectedBytes, viewModel.Bytes);
         }
     }
 }

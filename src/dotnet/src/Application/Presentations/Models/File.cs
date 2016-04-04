@@ -4,16 +4,12 @@ namespace Sogeti.Academy.Application.Presentations.Models
 {
     public class File
     {
-        [JsonProperty("id")]
         public string Id { get; set; }
-
-        [JsonProperty("type")]
         public string Type { get; set; }
-
-        [JsonProperty("name")]
         public string Name { get; set; }
+        public long Size { get; set; }
 
-        [JsonProperty("bytes")]
+        [JsonIgnore]
         public byte[] Bytes { get; set; }
     }
 }

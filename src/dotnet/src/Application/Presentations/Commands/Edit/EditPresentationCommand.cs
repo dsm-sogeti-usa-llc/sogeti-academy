@@ -8,7 +8,7 @@ using Sogeti.Academy.Application.Presentations.Storage;
 
 namespace Sogeti.Academy.Application.Presentations.Commands.Edit
 {
-    public interface IEditPresentationCommand : IDisposable
+    public interface IEditPresentationCommand
     {
         Task Execute(EditPresentationViewModel viewModel);
     }
@@ -31,11 +31,6 @@ namespace Sogeti.Academy.Application.Presentations.Commands.Edit
             var presentation = await presentations.GetByIdAsync(viewModel.Id);
             UpdatePresentation(presentation, viewModel);
             await presentations.UpdateAsync(presentation);
-        }
-
-        public void Dispose()
-        {
-            _presentationContext.Dispose();
         }
 
         private void UpdatePresentation(Presentation presentation, EditPresentationViewModel viewModel)

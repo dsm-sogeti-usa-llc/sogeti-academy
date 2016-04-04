@@ -5,7 +5,7 @@ using Sogeti.Academy.Application.Presentations.Storage;
 
 namespace Sogeti.Academy.Application.Presentations.Commands.Remove
 {
-    public interface IRemovePresentationCommand : IDisposable
+    public interface IRemovePresentationCommand
     {
         Task Execute(RemovePresentationViewModel viewModel);
     }
@@ -18,12 +18,7 @@ namespace Sogeti.Academy.Application.Presentations.Commands.Remove
         {
             _presentationContext = presentationContext;
         }
-
-        public void Dispose()
-        {
-            _presentationContext.Dispose();
-        }
-
+        
         public async Task Execute(RemovePresentationViewModel viewModel)
         {
             var collection = _presentationContext.GetCollection<Presentation>();

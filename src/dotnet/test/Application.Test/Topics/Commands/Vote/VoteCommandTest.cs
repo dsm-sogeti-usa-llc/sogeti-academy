@@ -14,18 +14,17 @@
     public class VoteCommandTest
     {
         private readonly Mock<IDocumentCollection<Topic>> _topicCollectionMock;
-        private readonly Mock<ITopicsContext> _topicsContextMock;
         private readonly Mock<IVoteFactory> _voteFactoryMock;
         private readonly VoteCommand _voteCommand;
 
         public VoteCommandTest()
         {
             _topicCollectionMock = new Mock<IDocumentCollection<Topic>>();
-            _topicsContextMock = new Mock<ITopicsContext>();
-            _topicsContextMock.Setup(s => s.GetCollection<Topic>()).Returns(_topicCollectionMock.Object);
+            var topicsContextMock = new Mock<ITopicsContext>();
+            topicsContextMock.Setup(s => s.GetCollection<Topic>()).Returns(_topicCollectionMock.Object);
 
             _voteFactoryMock = new Mock<IVoteFactory>();
-            _voteCommand = new VoteCommand(_topicsContextMock.Object, _voteFactoryMock.Object);
+            _voteCommand = new VoteCommand(topicsContextMock.Object, _voteFactoryMock.Object);
         }
 
         [Fact]
@@ -57,13 +56,6 @@
 
             await _voteCommand.Execute(viewModel);
             _topicCollectionMock.Verify(s => s.UpdateAsync(topic), Times.Once());
-        }
-
-        [Fact]
-        public void Dispose_ShouldDisposeContext()
-        {
-            _voteCommand.Dispose();
-            _topicsContextMock.Verify(s => s.Dispose(), Times.Once());
         }
     }
 }

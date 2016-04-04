@@ -13,18 +13,17 @@ namespace Application.Test.Presentations.Commands.Add
     public class AddPresentationCommandTest
     {
         private readonly Mock<IDocumentCollection<Presentation>> _presentationCollectionMock;
-        private readonly Mock<IPresentationContext> _presentationContext;
         private readonly Mock<IPresentationFactory> _presentationFactoryMock;
         private readonly AddPresentationCommand _addPresentationCommand;
 
         public AddPresentationCommandTest()
         {
             _presentationCollectionMock = new Mock<IDocumentCollection<Presentation>>();
-            _presentationContext = new Mock<IPresentationContext>();
-            _presentationContext.Setup(s => s.GetCollection<Presentation>()).Returns(_presentationCollectionMock.Object);
+            var presentationContext = new Mock<IPresentationContext>();
+            presentationContext.Setup(s => s.GetCollection<Presentation>()).Returns(_presentationCollectionMock.Object);
             _presentationFactoryMock = new Mock<IPresentationFactory>();
 
-            _addPresentationCommand = new AddPresentationCommand(_presentationContext.Object, _presentationFactoryMock.Object);
+            _addPresentationCommand = new AddPresentationCommand(presentationContext.Object, _presentationFactoryMock.Object);
         }
 
         [Fact]
@@ -38,13 +37,6 @@ namespace Application.Test.Presentations.Commands.Add
             _presentationCollectionMock.Setup(s => s.CreateAsync(presentation)).ReturnsAsync(expectedId);
             var id = await _addPresentationCommand.Execute(viewModel);
             Assert.Equal(expectedId, id);
-        }
-
-        [Fact]
-        public void Dispose_ShouldDisposeContext()
-        {
-            _addPresentationCommand.Dispose();
-            _presentationContext.Verify(s => s.Dispose(), Times.Once());
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
@@ -62,7 +63,7 @@ namespace Sogeti.Academy.Api.Test.Presentations.Controllers
             {
                 Name = "Bill",
                 Type = "application/txt",
-                Bytes = new byte[] {4, 5, 7, 2}
+                Bytes = new byte[] {45, 68, 78}
             };
             _getFileQueryMock.Setup(s => s.Execute(presentationId, fileId)).ReturnsAsync(viewModel);
 

@@ -13,7 +13,6 @@
     public class CreateTopicCommandTest
     {
         private readonly Mock<IDocumentCollection<Topic>> _topicCollectionMock;
-        private readonly Mock<ITopicsContext> _topicsContextMock;
         private readonly Mock<ITopicFactory> _topicFactoryMock;
         private readonly CreateTopicCommand _createTopicCommand;
 
@@ -22,10 +21,10 @@
             _topicFactoryMock = new Mock<ITopicFactory>();
 
             _topicCollectionMock = new Mock<IDocumentCollection<Topic>>();
-            _topicsContextMock = new Mock<ITopicsContext>();
-            _topicsContextMock.Setup(s => s.GetCollection<Topic>()).Returns(_topicCollectionMock.Object);
+            var topicsContextMock = new Mock<ITopicsContext>();
+            topicsContextMock.Setup(s => s.GetCollection<Topic>()).Returns(_topicCollectionMock.Object);
 
-            _createTopicCommand = new CreateTopicCommand(_topicsContextMock.Object, _topicFactoryMock.Object);
+            _createTopicCommand = new CreateTopicCommand(topicsContextMock.Object, _topicFactoryMock.Object);
         }
 
         [Fact]
@@ -41,13 +40,6 @@
 
             var actual = await _createTopicCommand.Execute(viewModel);
             Assert.Equal(id, actual);
-        }
-
-        [Fact]
-        public void Dispose_ShouldDisposeOfContext()
-        {
-            _createTopicCommand.Dispose();
-            _topicsContextMock.Verify(s => s.Dispose(), Times.Once());
         }
     }
 }

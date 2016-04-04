@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Moq;
 using Sogeti.Academy.Application.Presentations.Commands.Edit;
@@ -8,26 +9,26 @@ using Sogeti.Academy.Application.Presentations.Models;
 using Sogeti.Academy.Application.Presentations.Storage;
 using Sogeti.Academy.Application.Storage;
 using Xunit;
+using File = Sogeti.Academy.Application.Presentations.Models.File;
 
 namespace Application.Test.Presentations.Commands.Edit
 {
     public class EditPresentationCommandTest
     {
         private readonly Mock<IDocumentCollection<Presentation>> _presentationCollectionMock;
-        private readonly Mock<IPresentationContext> _presentationContextMock;
         private readonly Mock<IFileFactory> _fileFactoryMock;
         private readonly EditPresentationCommand _editPresentationCommand;
 
         public EditPresentationCommandTest()
         {
             _presentationCollectionMock = new Mock<IDocumentCollection<Presentation>>();
-            _presentationContextMock = new Mock<IPresentationContext>();
-            _presentationContextMock.Setup(s => s.GetCollection<Presentation>())
+            var presentationContextMock = new Mock<IPresentationContext>();
+            presentationContextMock.Setup(s => s.GetCollection<Presentation>())
                 .Returns(_presentationCollectionMock.Object);
 
             _fileFactoryMock = new Mock<IFileFactory>();
 
-            _editPresentationCommand = new EditPresentationCommand(_presentationContextMock.Object, _fileFactoryMock.Object);
+            _editPresentationCommand = new EditPresentationCommand(presentationContextMock.Object, _fileFactoryMock.Object);
         }
 
         [Fact]
@@ -69,8 +70,7 @@ namespace Application.Test.Presentations.Commands.Edit
                     new EditFileViewModel
                     {
                         Name = "One",
-                        Type = "Doc",
-                        Bytes = new byte[] {5,4,23,7}
+                        Type = "Doc"
                     }
                 }
             };
@@ -99,7 +99,7 @@ namespace Application.Test.Presentations.Commands.Edit
                         Id = Guid.NewGuid().ToString(),
                         Name = "Nuts",
                         Type = "DOC",
-                        Bytes = new byte[] {6,4,3,1,9}
+                        Bytes = new byte[] {12, 15, 78}
                     }
                 }
             };
@@ -143,7 +143,7 @@ namespace Application.Test.Presentations.Commands.Edit
                     new File
                     {
                         Id = viewModel.Files[0].Id,
-                        Bytes = new byte[] {4,6,7,8}
+                        Bytes = new byte[] {5, 3, 7, 5}
                     }
                 }
             };
@@ -151,6 +151,39 @@ namespace Application.Test.Presentations.Commands.Edit
 
             await _editPresentationCommand.Execute(viewModel);
             Assert.NotEqual(viewModel.Files[0].Bytes, presentation.Files[0].Bytes);
+        }
+
+        [Fact]
+        public async Task Execute_ShouldNotUpdateFileSize()
+        {
+            var viewModel = new EditPresentationViewModel
+            {
+                Files = new[]
+                {
+                    new EditFileViewModel
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = "Nuts",
+                        Type = "DOC"
+                    }
+                }
+            };
+            var presentation = new Presentation
+            {
+                Files = new List<File>
+                {
+                    new File
+                    {
+                        Id = viewModel.Files[0].Id,
+                        Bytes = new byte[] {5, 3, 7, 5},
+                        Size = 534
+                    }
+                }
+            };
+            _presentationCollectionMock.Setup(s => s.GetByIdAsync(viewModel.Id)).ReturnsAsync(presentation);
+
+            await _editPresentationCommand.Execute(viewModel);
+            Assert.Equal(534, presentation.Files[0].Size);
         }
 
         [Fact]
@@ -174,13 +207,6 @@ namespace Application.Test.Presentations.Commands.Edit
 
             await _editPresentationCommand.Execute(viewModel);
             Assert.Empty(presentation.Files);
-        }
-
-        [Fact]
-        public void Dispose_ShouldDisposeOfContext()
-        {
-            _editPresentationCommand.Dispose();
-            _presentationContextMock.Verify(s => s.Dispose(), Times.Once());
         }
     }
 }

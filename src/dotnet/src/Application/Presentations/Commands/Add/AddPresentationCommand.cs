@@ -6,7 +6,7 @@ using Sogeti.Academy.Application.Presentations.Storage;
 
 namespace Sogeti.Academy.Application.Presentations.Commands.Add
 {
-    public interface IAddPresentationCommand : IDisposable
+    public interface IAddPresentationCommand
     {
         Task<string> Execute(AddPresentationViewModel viewModel);
     }
@@ -27,11 +27,6 @@ namespace Sogeti.Academy.Application.Presentations.Commands.Add
             var presentation = _presentationFactory.Create(viewModel);
             var presentations = _presentationContext.GetCollection<Presentation>();
             return await presentations.CreateAsync(presentation);
-        }
-
-        public void Dispose()
-        {
-            _presentationContext.Dispose();
         }
     }
 }

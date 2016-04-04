@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
+using Sogeti.Academy.Application.Presentations.ViewModels;
 
 namespace Sogeti.Academy.Api
 {
@@ -11,6 +14,23 @@ namespace Sogeti.Academy.Api
                 .Where(p => p.Contains("filename"))
                 .Select(p => p.Split('=')[1].Replace("\"", ""))
                 .FirstOrDefault();
+        }
+
+        public static async Task<T> AsViewModel<T>(this IFormFile file) where T : IFileViewModel, new()
+        {
+            return new T
+            {
+                Name = file.GetFilename(),
+                Type = file.ContentType,
+                Bytes = await ReadStream(file)
+            };
+        }
+
+        private static async Task<byte[]> ReadStream(IFormFile file)
+        {
+            var buffer = new byte[file.Length];
+            await file.OpenReadStream().ReadAsync(buffer, 0, (int) file.Length);
+            return buffer;
         }
     }
 }

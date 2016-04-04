@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace Sogeti.Academy.Application.Presentations.Commands.Edit
 {
     public class EditPresentationViewModel
@@ -11,7 +9,7 @@ namespace Sogeti.Academy.Application.Presentations.Commands.Edit
 
         public EditPresentationViewModel()
         {
-            Files = Enumerable.Empty<EditFileViewModel>().ToArray();
+            Files = new EditFileViewModel[0];
         }
     }
 }

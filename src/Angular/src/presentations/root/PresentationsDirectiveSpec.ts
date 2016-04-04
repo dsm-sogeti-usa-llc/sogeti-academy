@@ -25,7 +25,7 @@ describe('PresentationsDirective', () => {
     });
     
     it('should specify controller as', () => {
-        expect(directive.controllerAs).toBe('$pres');
+        expect(directive.controllerAs).toBe('$root');
     });
     
     it('should specify template', () => {

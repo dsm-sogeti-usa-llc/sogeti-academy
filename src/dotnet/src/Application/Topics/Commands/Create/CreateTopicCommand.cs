@@ -6,7 +6,7 @@ using Sogeti.Academy.Application.Topics.Storage;
 
 namespace Sogeti.Academy.Application.Topics.Commands.Create
 {
-	public interface ICreateTopicCommand : IDisposable
+	public interface ICreateTopicCommand
 	{
 		Task<string> Execute(CreateTopicViewModel viewModel);
 	}
@@ -21,11 +21,6 @@ namespace Sogeti.Academy.Application.Topics.Commands.Create
 			_topicsContext = topicsContext;
             _topicFactory = topicFactory;
 		}
-		
-        public void Dispose()
-        {
-            _topicsContext.Dispose();
-        }
 
         public Task<string> Execute(CreateTopicViewModel viewModel)
         {

@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using Sogeti.Academy.Api.Presentations.ModelBinders;
 using Sogeti.Academy.Application.Presentations.Commands.Add;
@@ -63,7 +59,7 @@ namespace Sogeti.Academy.Api.Presentations.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(EditPresentationViewModel viewModel)
+        public async Task<IActionResult> Edit([ModelBinder(BinderType = typeof(EditPresentationViewModelBinder))] EditPresentationViewModel viewModel)
         {
             await _editPresentationCommand.Execute(viewModel);
             return Ok();

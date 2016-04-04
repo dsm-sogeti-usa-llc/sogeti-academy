@@ -6,7 +6,7 @@ using Sogeti.Academy.Application.Topics.Storage;
 
 namespace Sogeti.Academy.Application.Topics.Queries.GetList
 {
-	public interface IGetListQuery : IDisposable
+	public interface IGetListQuery 
 	{
 		Task<ListViewModel> Execute();
 	}
@@ -19,12 +19,7 @@ namespace Sogeti.Academy.Application.Topics.Queries.GetList
         {
             _topicsContext = topicsContext;
         }
-
-        public void Dispose()
-        {
-            _topicsContext.Dispose();
-        }
-
+        
         public async Task<ListViewModel> Execute()
         {
             var collection = _topicsContext.GetCollection<Topic>();

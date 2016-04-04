@@ -13,16 +13,15 @@ namespace Application.Test.Presentations.Queries.GetDetail
     public class GetDetailQueryTest
     {
         private readonly Mock<IDocumentCollection<Presentation>> _presentationCollectionMock;
-        private readonly Mock<IPresentationContext> _presentationsContextMock;
         private readonly GetDetailQuery _getDetailQuery;
 
         public GetDetailQueryTest()
         {
             _presentationCollectionMock = new Mock<IDocumentCollection<Presentation>>();
-            _presentationsContextMock = new Mock<IPresentationContext>();
-            _presentationsContextMock.Setup(s => s.GetCollection<Presentation>()).Returns(_presentationCollectionMock.Object);
+            var presentationsContextMock = new Mock<IPresentationContext>();
+            presentationsContextMock.Setup(s => s.GetCollection<Presentation>()).Returns(_presentationCollectionMock.Object);
 
-            _getDetailQuery = new GetDetailQuery(_presentationsContextMock.Object);
+            _getDetailQuery = new GetDetailQuery(presentationsContextMock.Object);
         }
 
         [Fact]
@@ -56,21 +55,21 @@ namespace Application.Test.Presentations.Queries.GetDetail
                         Id = Guid.NewGuid().ToString(),
                         Name = "Pres",
                         Type = "PPT",
-                        Bytes = new byte[] {2, 3, 23, 5}
+                        Size = 5465165
                     },
                     new File
                     {
                         Id = Guid.NewGuid().ToString(),
                         Name = "TDD",
                         Type = "zip",
-                        Bytes = new byte[] {2, 3, 23, 5, 32, 12}
+                        Size = 123414
                     },
                     new File
                     {
                         Id = Guid.NewGuid().ToString(),
                         Name = "doc",
                         Type = "word",
-                        Bytes = new byte[] {2, 3, 23, 5, 2}
+                        Size = 4984
                     }
                 }
             };
@@ -81,20 +80,13 @@ namespace Application.Test.Presentations.Queries.GetDetail
             AreEqual(presentation.Files[1], viewModel.Files[1]);
             AreEqual(presentation.Files[2], viewModel.Files[2]);
         }
-
-        [Fact]
-        public void Dispose_ShouldDisposeContext()
-        {
-            _getDetailQuery.Dispose();
-            _presentationsContextMock.Verify(s => s.Dispose(), Times.Once());
-        }
-
+        
         private static void AreEqual(File file, FileDetailViewModel viewModel)
         {
             Assert.Equal(file.Id, viewModel.Id);
             Assert.Equal(file.Name, viewModel.Name);
             Assert.Equal(file.Type, viewModel.Type);
-            Assert.Equal(file.Bytes.Length, viewModel.Size);
+            Assert.Equal(file.Size, viewModel.Size);
         }
     }
 }

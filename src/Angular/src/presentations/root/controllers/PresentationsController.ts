@@ -1,20 +1,20 @@
+import {PresentationDetailState} from '../../detail/PresentationDetailState';
+
 export class PresentationsController {
-    static $inject = ['$rootScope', '$mdDialog'];
+    static $inject = ['$mdMedia', '$state'];
     
-    constructor(private $rootScope: angular.IRootScopeService,
-        private $mdDialog: angular.material.IDialogService) {
-        
+    get showList(): boolean {
+        return this.$mdMedia('gt-sm')
+            || !this.$state.is(PresentationDetailState);
     }
     
-    addPresentation(): void {
-        const options: angular.material.IDialogOptions = {
-            autoWrap: false,
-            clickOutsideToClose: false,
-            escapeToClose: false, 
-            hasBackdrop: true,
-            template: '<add-presentation></add-presentation>'
-        };
-        this.$mdDialog.show(options)
-            .then((viewModel) => this.$rootScope.$broadcast('$presentation-added', viewModel));    
+    get showDetail(): boolean {
+        return this.$mdMedia('gt-sm')
+            || this.$state.is(PresentationDetailState);
+    }
+    
+    constructor(private $mdMedia: angular.material.IMedia,
+        private $state: angular.ui.IStateService) {
+        
     }
 }

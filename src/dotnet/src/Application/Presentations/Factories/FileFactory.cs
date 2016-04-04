@@ -17,8 +17,9 @@ namespace Sogeti.Academy.Application.Presentations.Factories
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = viewModel.Name,
+                Type = viewModel.Type,
                 Bytes = viewModel.Bytes,
-                Type = viewModel.Type
+                Size = viewModel.Bytes?.Length ?? 0
             };
         }
     }

@@ -6,7 +6,7 @@ using Sogeti.Academy.Application.Presentations.Storage;
 
 namespace Sogeti.Academy.Application.Presentations.Queries.GetDetail
 {
-    public interface IGetDetailQuery : IDisposable
+    public interface IGetDetailQuery 
     {
         Task<PresentationDetailViewModel> Execute(string id);
     }
@@ -32,12 +32,7 @@ namespace Sogeti.Academy.Application.Presentations.Queries.GetDetail
                 Files = presentation.Files.Select(Map).ToArray()
             };
         }
-
-        public void Dispose()
-        {
-            _presentationContext.Dispose();
-        }
-
+        
         private static FileDetailViewModel Map(File file)
         {
             return new FileDetailViewModel
@@ -45,7 +40,7 @@ namespace Sogeti.Academy.Application.Presentations.Queries.GetDetail
                 Id = file.Id,
                 Name = file.Name,
                 Type = file.Type,
-                Size = file.Bytes.Length
+                Size = file.Size
             };
         }
     }

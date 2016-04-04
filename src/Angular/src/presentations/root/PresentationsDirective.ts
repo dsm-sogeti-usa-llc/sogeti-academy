@@ -6,7 +6,7 @@ import '../detail/PresentationDetailDirective';
 export class PresentationsDirective implements angular.IDirective {
     scope = {};
     controller = PresentationsController;
-    controllerAs = '$pres';
+    controllerAs = '$root';
     template = require('./templates/presentations');
        
     static factory(): angular.IDirectiveFactory {

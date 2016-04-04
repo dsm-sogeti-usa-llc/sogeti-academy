@@ -2,26 +2,26 @@
     <md-toolbar>
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button" ng-click="$detail.goBack()">
-                <md-icon>back_arrow</md-icon>
+                <md-icon>arrow_back</md-icon>
             </md-button>
-            <h2>{{$detail.topic}}</h2>
+            <h2 ng-hide="$detail.isLoading">{{$detail.topic}}</h2>
             <span flex></span>
-            <md-button ng-click="$detail.save()">
+            <md-button ng-click="$detail.save()" ng-disabled="!$detail.canSave">
                 Save
             </md-button>
         </div>
     </md-toolbar>
-    <md-content flex layout-padding>
-        <ng-form name="form" >
+    <md-content flex layout-padding ng-if="!$detail.isLoading && !$detail.isSaving">
+        <ng-form name="$detail.form">
             <md-input-container>
                 <label>Topic</label>
-                <input type="text" ng-model="$detail.topic" />
+                <input type="text" ng-model="$detail.topic" required />
             </md-input-container>
-            <md-input-container>
+            <md-input-container class="md-block md-margin">
                 <label>Description</label>
                 <textarea ng-model="$detail.description" rows="5"></textarea>
             </md-input-container>
-            
+
             <md-list>
                 <md-list-item class="secondary-button-padding" ng-repeat="file in $detail.files">
                     <h4>{{file.name}}</h4>
@@ -32,4 +32,8 @@
             </md-list>
         </ng-form>
     </md-content>
+    
+    <div flex layout="row" layout-align="center center" ng-show="$detail.isLoading || $detail.isSaving">
+        <md-progress-circular md-diameter="96" md-mode="indeterminate"></md-progress-circular>
+    </div>
 </div>

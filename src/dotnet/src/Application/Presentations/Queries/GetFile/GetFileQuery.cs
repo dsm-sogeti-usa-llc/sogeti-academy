@@ -6,7 +6,7 @@ using Sogeti.Academy.Application.Presentations.Storage;
 
 namespace Sogeti.Academy.Application.Presentations.Queries.GetFile
 {
-    public interface IGetFileQuery : IDisposable
+    public interface IGetFileQuery 
     {
         Task<FileDownloadViewModel> Execute(string presentationId, string fileId);
     }
@@ -27,17 +27,12 @@ namespace Sogeti.Academy.Application.Presentations.Queries.GetFile
             var file = presentation.Files.Single(f => f.Id == fileId);
             return new FileDownloadViewModel
             {
-                Bytes = file.Bytes,
                 Name = file.Name,
                 Type = file.Type,
                 FileId = file.Id,
-                PresentationId = presentation.Id
+                PresentationId = presentation.Id,
+                Bytes = file.Bytes
             };
-        }
-
-        public void Dispose()
-        {
-            _presentationContext.Dispose();
         }
     }
 }

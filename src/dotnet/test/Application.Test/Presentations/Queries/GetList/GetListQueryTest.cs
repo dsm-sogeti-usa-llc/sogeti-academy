@@ -13,17 +13,16 @@ namespace Application.Test.Presentations.Queries.GetList
     public class GetListQueryTest
     {
         private readonly Mock<IDocumentCollection<Presentation>> _presentationCollectionMock;
-        private readonly Mock<IPresentationContext> _presentationContextMock;
         private readonly GetListQuery _getListQuery;
 
         public GetListQueryTest()
         {
             _presentationCollectionMock = new Mock<IDocumentCollection<Presentation>>();
 
-            _presentationContextMock = new Mock<IPresentationContext>();
-            _presentationContextMock.Setup(s => s.GetCollection<Presentation>()).Returns(_presentationCollectionMock.Object);
+            var presentationContextMock = new Mock<IPresentationContext>();
+            presentationContextMock.Setup(s => s.GetCollection<Presentation>()).Returns(_presentationCollectionMock.Object);
 
-            _getListQuery = new GetListQuery(_presentationContextMock.Object);
+            _getListQuery = new GetListQuery(presentationContextMock.Object);
         }
 
         [Fact]
@@ -96,13 +95,6 @@ namespace Application.Test.Presentations.Queries.GetList
 
             var viewModel = await _getListQuery.Execute();
             Assert.Equal(presentations[0].Id, viewModel.Presentations[0].Id);
-        }
-
-        [Fact]
-        public void Dispose_ShouldDisposeContext()
-        {
-            _getListQuery.Dispose();
-            _presentationContextMock.Verify(s => s.Dispose(), Times.Once());
         }
     }
 }

@@ -15,7 +15,7 @@
                     <label>Topic</label>
                     <input ng-model="$add.topic" type="text" required md-autofocus ng-disabled="$add.isSaving" />
                 </md-input-container>
-                <md-input-container ng-hide="$add.isSaving">
+                <md-input-container class="md-block" ng-hide="$add.isSaving">
                     <label>Description</label>
                     <textarea ng-model="$add.description" rows="5" ng-disabled="$add.isSaving"></textarea>
                 </md-input-container>

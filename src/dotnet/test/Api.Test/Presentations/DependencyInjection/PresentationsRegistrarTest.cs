@@ -53,6 +53,14 @@ namespace Sogeti.Academy.Api.Test.Presentations.DependencyInjection
         }
 
         [Fact]
+        public void RegisterServices_ShouldAddPresentationBlobStorage()
+        {
+            Register();
+            var descriptor = _services.GetDescriptor<IPresentationBlobStorage, PresentationBlobStorage>();
+            Assert.NotNull(descriptor);
+        }
+
+        [Fact]
         public void RegisterServices_ShouldAddAddPresentationCommand()
         {
             Register();

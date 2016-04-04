@@ -20,6 +20,7 @@ namespace Sogeti.Academy.Api.Presentations.DependencyInjection
             services.AddTransient<IPresentationFactory, PresentationFactory>();
             services.AddTransient<IFileFactory, FileFactory>();
             services.AddTransient<IPresentationContext, PresentationContext>();
+            services.AddTransient<IPresentationBlobStorage, PresentationBlobStorage>();
             services.AddTransient<IAddPresentationCommand, AddPresentationCommand>();
             services.AddTransient<IEditPresentationCommand, EditPresentationCommand>();
             services.AddTransient<IRemovePresentationCommand, RemovePresentationCommand>();

@@ -39,6 +39,14 @@ namespace Application.Test.Presentations.Factories
         }
 
         [Fact]
+        public void Create_ShouldSetSize()
+        {
+            var viewModel = new AddFileViewModel {Bytes = new byte[] {5, 3, 1, 45, 6, 4, 12, 90}};
+            var file = _fileFactory.Create(viewModel);
+            Assert.Equal(viewModel.Bytes.Length, file.Size);
+        }
+
+        [Fact]
         public void Create_ShouldSetId()
         {
             var viewModel = new AddFileViewModel();

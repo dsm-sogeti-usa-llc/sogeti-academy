@@ -12,25 +12,17 @@ namespace Application.Test.Presentations.Commands.Remove
     public class RemovePresentationCommandTest
     {
         private readonly Mock<IDocumentCollection<Presentation>> _presentationCollectionMock;
-        private readonly Mock<IPresentationContext> _presentationContextMock;
         private readonly RemovePresentationCommand _removePresentationCommand;
 
         public RemovePresentationCommandTest()
         {
             _presentationCollectionMock = new Mock<IDocumentCollection<Presentation>>();
-            _presentationContextMock = new Mock<IPresentationContext>();
-            _presentationContextMock.Setup(s => s.GetCollection<Presentation>()).Returns(_presentationCollectionMock.Object);
+            var presentationContextMock = new Mock<IPresentationContext>();
+            presentationContextMock.Setup(s => s.GetCollection<Presentation>()).Returns(_presentationCollectionMock.Object);
 
-            _removePresentationCommand = new RemovePresentationCommand(_presentationContextMock.Object);
+            _removePresentationCommand = new RemovePresentationCommand(presentationContextMock.Object);
         }
-
-        [Fact]
-        public void Dispose_ShouldDisposeContext()
-        {
-            _removePresentationCommand.Dispose();
-            _presentationContextMock.Verify(s => s.Dispose(), Times.Once());
-        }
-
+        
         [Fact]
         public async Task Execute_ShouldRemovePresentation()
         {

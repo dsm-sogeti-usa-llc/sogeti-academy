@@ -3,7 +3,7 @@ import {PresentationListController} from './controllers/PresentationListControll
 export class PresentationListDirective implements angular.IDirective {
     scope = {};
     controller = PresentationListController;
-    controllerAs = '$presList';
+    controllerAs = '$list';
     template = require('./templates/presentationList');
     
     static factory(): angular.IDirectiveFactory {

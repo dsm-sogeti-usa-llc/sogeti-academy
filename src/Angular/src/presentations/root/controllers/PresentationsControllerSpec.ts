@@ -1,59 +1,54 @@
 import {PresentationsController} from './PresentationsController';
 import {AddPresentationViewModel} from '../../add/models/AddPresentationViewModel';
+import {PresentationDetailState} from '../../detail/PresentationDetailState';
 import {createFile} from '../../../createFile';
 
 describe('PresentationsController', () => {
     let createController: () => PresentationsController;
-    let $mdDialog: angular.material.IDialogService;
-    let $q: angular.IQService;
-    let $rootScope: angular.IRootScopeService;
+    let $state: angular.ui.IStateService;
     
     beforeEach(angular.mock.module('sogeti-academy'));
     
-    beforeEach(angular.mock.inject((_$controller_, _$rootScope_, _$mdDialog_, _$q_) => {
-        $q = _$q_;
-        $mdDialog = _$mdDialog_;
-        $rootScope = _$rootScope_;
+    beforeEach(angular.mock.inject((_$controller_, _$mdMedia_, _$state_) => {
+        $state = _$state_;
+        this.$mdMedia = _$mdMedia_;
         
         createController = () => {
             return _$controller_(PresentationsController, {
-                $mdDialog: $mdDialog,
-                $q: _$q_
+                $mdMedia: this.$mdMedia,
+                $state: $state
             });
         };
     }));
     
-    it('should open add presentation dialog', () => {
-        spyOn($mdDialog, 'show').and.callThrough();
+    it('should show list and detail', () => {
+        spyOn(this, '$mdMedia').and.returnValue(true);
         
         const controller = createController();
-        controller.addPresentation();
-        expect($mdDialog.show).toHaveBeenCalledWith({
-            template: '<add-presentation></add-presentation>',
-            hasBackdrop: true,
-            clickOutsideToClose: false,
-            escapeToClose: false,
-            autoWrap: false
-        });
+        expect(controller.showList).toBeTruthy();
+        expect(controller.showDetail).toBeTruthy();
+        expect(this.$mdMedia).toHaveBeenCalledWith('gt-sm');
     });
     
-    it('should broadcast added presentation', () => {
-        let viewModel: AddPresentationViewModel = {
-            topic: 'stuff',
-            description: 'desc',
-            files: [
-                createFile(),
-                createFile(),
-                createFile()
-            ]
-        }
-        spyOn($mdDialog, 'show').and.callFake(() => $q.resolve(viewModel)); 
-        spyOn($rootScope, '$broadcast').and.callThrough();
+    it('should show only list', () => {
+        spyOn(this, '$mdMedia').and.returnValue(false);
+        spyOn($state, 'is').and.returnValue(false);
         
         const controller = createController();
-        controller.addPresentation();
-        $rootScope.$digest();
+        expect(controller.showDetail).toBeFalsy();
+        expect(controller.showList).toBeTruthy();
+        expect($state.is).toHaveBeenCalledWith(PresentationDetailState);
+        expect(this.$mdMedia).toHaveBeenCalledWith('gt-sm');
+    });
+    
+    it('should show only detail', () => {
+         spyOn(this, '$mdMedia').and.returnValue(false);
+        spyOn($state, 'is').and.returnValue(true);
         
-        expect($rootScope.$broadcast).toHaveBeenCalledWith('$presentation-added', viewModel);
+        const controller = createController();
+        expect(controller.showDetail).toBeTruthy();
+        expect(controller.showList).toBeFalsy();
+        expect($state.is).toHaveBeenCalledWith(PresentationDetailState);
+        expect(this.$mdMedia).toHaveBeenCalledWith('gt-sm');
     });
 });

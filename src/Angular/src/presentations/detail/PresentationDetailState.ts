@@ -4,7 +4,7 @@ export const PresentationDetailState: INavigationState = {
     name: 'presentations.detail',
     template: '<presentation-detail></presentation-detail>',
     url: '/presentations/:id',
-    title: 'Presentation Detail',
+    title: 'Presentations',
     parent: 'presentations'
 };
 

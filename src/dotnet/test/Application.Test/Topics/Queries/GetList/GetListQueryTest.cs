@@ -13,16 +13,15 @@
     public class GetListQueryTest
     {
         private readonly Mock<IDocumentCollection<Topic>> _topicCollectionMock;
-        private readonly Mock<ITopicsContext> _topicsContextMock;
         private readonly GetListQuery _getListQuery;
 
         public GetListQueryTest()
         {
             _topicCollectionMock = new Mock<IDocumentCollection<Topic>>();
-            _topicsContextMock = new Mock<ITopicsContext>();
-            _topicsContextMock.Setup(s => s.GetCollection<Topic>()).Returns(_topicCollectionMock.Object);
+            var topicsContextMock = new Mock<ITopicsContext>();
+            topicsContextMock.Setup(s => s.GetCollection<Topic>()).Returns(_topicCollectionMock.Object);
 
-            _getListQuery = new GetListQuery(_topicsContextMock.Object);
+            _getListQuery = new GetListQuery(topicsContextMock.Object);
         }
 
         [Fact]
@@ -120,13 +119,6 @@
             Assert.Equal("TDD", viewModel.Topics[0].Name);
             Assert.Equal("Bogus", viewModel.Topics[1].Name);
             Assert.Equal("React", viewModel.Topics[2].Name);
-        }
-
-        [Fact]
-        public void Dispose_ShouldDisposeContext()
-        {
-            _getListQuery.Dispose();
-            _topicsContextMock.Verify(s => s.Dispose(), Times.Once());
         }
     }
 }
