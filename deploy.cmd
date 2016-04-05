@@ -1,8 +1,8 @@
 if (%APP% == "api")
-    call ".\src\dotnet\deployapi.cmd"
+    call ".\src\dotnet\deploy-api.cmd"
     
 if (%APP% == "mvc")
-    call ".\src\dotnet\deploymvc.cmd"
+    call ".\src\dotnet\deploy-mvc.cmd"
     
 if (%APP% == "angular")
     call ".\src\angular\deploy.cmd"
