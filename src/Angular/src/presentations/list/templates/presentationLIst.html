@@ -1,0 +1,29 @@
+<div layout="column" layout-fill>
+    <md-list flex="85" ng-hide="$list.isLoading">
+        <md-list-item class="md-2-line" ng-click="$list.goToDetail(presentation)" ng-repeat="presentation in $list.presentations">
+            <div class="md-list-item-text" layout="column">
+                <h3>{{presentation.topic}}</h3>
+                <h4>{{presentation.description}}</h4>
+            </div>
+        </md-list-item>
+    </md-list>
+    
+    <md-fab-toolbar md-open="$list.isToolbarOpen" md-direction="left" ng-hide="$list.isLoading">
+        <md-fab-trigger class="align-with-text">
+            <md-button aria-label="menu" class="md-fab md-primary">
+                <md-icon>menu</md-icon>
+            </md-button>
+        </md-fab-trigger>
+        <md-toolbar>
+            <md-fab-actions class="md-toolbar-tools">
+                <md-button ng-click="$list.addPresentation()" aria-label="Add rootentation" class="md-icon-button">
+                    <md-icon>add</md-icon>
+                </md-button>
+            </md-fab-actions>
+        </md-toolbar>
+    </md-fab-toolbar>
+    
+    <div flex layout="row" layout-align="center center" ng-show="$list.isLoading">
+        <md-progress-circular md-diameter="96" md-mode="indeterminate"></md-progress-circular>
+    </div>
+</div>

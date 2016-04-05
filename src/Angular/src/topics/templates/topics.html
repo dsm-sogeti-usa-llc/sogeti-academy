@@ -1,0 +1,25 @@
+<div layout="column" flex>
+    <md-list>
+        <md-list-item ng-repeat="topic in $topics.topics">
+            <md-icon class="vote-count">{{topic.votes}}</md-icon>
+            <p>{{topic.name}}</p>
+            <md-button ng-click="$topics.voteForTopic(topic)" class="md-icon-button md-primary">
+                <md-icon>add</md-icon>
+            </md-button>
+        </md-list-item>
+    </md-list>
+    <md-fab-toolbar class="fixed-fab-toolbar" md-open="$topics.isToolbarOpen" md-direction="left">
+        <md-fab-trigger class="align-with-text">
+            <md-button aria-label="menu" class="md-fab md-primary">
+                <md-icon>menu</md-icon>
+            </md-button>
+        </md-fab-trigger>
+        <md-toolbar>
+            <md-fab-actions class="md-toolbar-tools">
+                <md-button ng-click="$topics.createTopic()" aria-label="Create Topic" class="md-icon-button">
+                    <md-icon>add</md-icon>
+                </md-button>
+            </md-fab-actions>
+        </md-toolbar>
+    </md-fab-toolbar>
+</div>

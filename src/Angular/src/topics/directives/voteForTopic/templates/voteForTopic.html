@@ -1,0 +1,32 @@
+<md-dialog aria-label="Vote For Topic">
+    <ng-form name="$vote.form">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Vote For {{$vote.topic.Name}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="$vote.cancel()" ng-disabled="$vote.isSaving">
+                    <md-icon>close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-input-container ng-hide="$vote.isSaving">
+                    <label>Email</label>
+                    <input ng-model="$vote.email" required type="email" md-autofocus ng-disabled="$vote.isSaving" />
+                </md-input-container>
+                <div layout="row" layout-align="space-around" ng-show="$vote.isSaving">
+                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row" layout-align="end center">
+            <md-button ng-click="$vote.save()" ng-disabled="$vote.isSaving || !$vote.canSave">
+                Save
+            </md-button>
+            <md-button ng-click="$vote.cancel()" ng-disabled="$vote.isSaving">
+                Cancel
+            </md-button>
+        </md-dialog-actions>
+    </ng-form>
+</md-dialog>

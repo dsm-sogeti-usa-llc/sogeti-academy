@@ -3,16 +3,19 @@
   "version": "0.0.1",
   "description": "Home of the source code for Sogeti Academy. This repository is completely open source and therefore contains no passwords, usernames, keys, etc.",
   "scripts": {
-    "start": "start npm run start:api & start npm run start:mvc & start npm run start:react",
-    "start:api": "cd .\\src\\Api & dnx web",
-    "start:mvc": "cd .\\src\\Mvc & dnx web",
-    "start:react": "cd .\\src\\React & npm run start:dev",
-    "test": "npm run test:api & npm run test:mvc & npm run test:application & npm run test:infrastructure & npm run test:persistence",
-    "test:api": "cd .\\test\\Api.Test & dnx test",
-    "test:mvc": "cd .\\test\\Mvc.Test & dnx test",
-    "test:application": "cd .\\test\\Application.Test & dnx test",
-    "test:infrastructure": "cd .\\test\\Infrastructure.Test & dnx test",
-    "test:persistence": "cd .\\test\\Persistence.Test & dnx test"
+    "start": "start npm run start:dotnet start npm run start:react & start npm run start:angular",
+    "start:dotnet": "cd .\\src\\dotnet & npm start",
+    "start:react": "cd .\\src\\react & npm run start:dev",
+    "start:angular": "cd .\\src\\angular & npm run start:dev",
+    
+    "test": "npm run test:dotnet & npm run test:angular",
+    "test:dotnet": "cd .\\src\\dotnet & npm test",
+    "test:angular": "cd .\\src\\angular & npm run test:single",
+    
+    "install": "npm run install:dotnet & npm run install:angular & npm run install:react",
+    "install:dotnet": "cd .\\src\\dotnet & npm install",
+    "install:angular": "cd .\\src\\angular & npm install",
+    "install:react": "cd .\\src\\react & npm install"
   },
   "repository": {
     "type": "git",
