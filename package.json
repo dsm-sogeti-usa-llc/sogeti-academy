@@ -3,17 +3,14 @@
   "version": "0.0.1",
   "description": "Home of the source code for Sogeti Academy. This repository is completely open source and therefore contains no passwords, usernames, keys, etc.",
   "scripts": {
-    "start": "start npm run start:dotnet start npm run start:react & start npm run start:angular",
-    "start:dotnet": "cd .\\src\\dotnet & npm start",
+    "start": "start npm run start:react & start npm run start:angular",
     "start:react": "cd .\\src\\react & npm run start:dev",
     "start:angular": "cd .\\src\\angular & npm run start:dev",
     
-    "test": "npm run test:dotnet & npm run test:angular",
-    "test:dotnet": "cd .\\src\\dotnet & npm test",
+    "test": "npm run test:angular",
     "test:angular": "cd .\\src\\angular & npm run test:single",
     
-    "install": "npm run install:dotnet & npm run install:angular & npm run install:react",
-    "install:dotnet": "cd .\\src\\dotnet & npm install",
+    "install": "npm run install:angular & npm run install:react",
     "install:angular": "cd .\\src\\angular & npm install",
     "install:react": "cd .\\src\\react & npm install"
   },
