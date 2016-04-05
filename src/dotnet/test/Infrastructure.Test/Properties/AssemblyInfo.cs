@@ -8,9 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Infrastructure.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Pioneer Hi-Bred")]
 [assembly: AssemblyProduct("Infrastructure.Test")]
-[assembly: AssemblyCopyright("Copyright © Pioneer Hi-Bred 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

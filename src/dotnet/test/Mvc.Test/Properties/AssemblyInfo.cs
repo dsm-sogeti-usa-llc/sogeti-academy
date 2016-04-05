@@ -8,9 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Mvc.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Pioneer Hi-Bred")]
 [assembly: AssemblyProduct("Mvc.Test")]
-[assembly: AssemblyCopyright("Copyright © Pioneer Hi-Bred 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
