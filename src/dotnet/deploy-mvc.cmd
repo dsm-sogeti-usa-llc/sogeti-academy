@@ -89,11 +89,11 @@ IF !ERRORLEVEL! NEQ 0 goto error
 
 
 :: 3. Run DNU Restore
-call %DNX_RUNTIME%\bin\dnu restore "D:\home\site\repository\src\dotnet\Mvc\project.json" %SCM_DNU_RESTORE_OPTIONS%
+call %DNX_RUNTIME%\bin\dnu restore "%DEPLOYMENT_SOURCE%" %SCM_DNU_RESTORE_OPTIONS%
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 4. Run DNU Bundle
-call %DNX_RUNTIME%\bin\dnu publish "D:\home\site\repository\src\dotnet\Mvc\project.json" --runtime %DNX_RUNTIME% --out "%DEPLOYMENT_TEMP%" %SCM_DNU_PUBLISH_OPTIONS%
+call %DNX_RUNTIME%\bin\dnu publish "D:\home\site\repository\src\dotnet\src\Mvc\project.json" --runtime %DNX_RUNTIME% --out "%DEPLOYMENT_TEMP%" %SCM_DNU_PUBLISH_OPTIONS%
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 5. KuduSync
