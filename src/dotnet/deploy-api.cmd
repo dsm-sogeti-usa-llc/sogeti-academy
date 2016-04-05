@@ -89,7 +89,7 @@ IF !ERRORLEVEL! NEQ 0 goto error
 
 
 :: 3. Run DNU Restore
-call %DNX_RUNTIME%\bin\dnu restore "%DEPLOYMENT_SOURCE%" %SCM_DNU_RESTORE_OPTIONS%
+call %DNX_RUNTIME%\bin\dnu restore "D:\home\site\repository\src\dotnet\Api\project.json" %SCM_DNU_RESTORE_OPTIONS%
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 4. Run DNU Bundle
