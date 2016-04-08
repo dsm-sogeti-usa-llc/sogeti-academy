@@ -6,3 +6,7 @@ __build__
 **/project.lock.json
 typings
 **/*.user
+**/packages
+**/obj
+**/bin
+**/*.DotSettings.user

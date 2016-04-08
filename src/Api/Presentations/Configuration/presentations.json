@@ -1,8 +1,0 @@
-﻿{
-  "Presentations": {
-    "DocumentDbEndpiontUrl": "",
-    "DocumentDbAuthKey": "",
-    "BlobStorageConnectionString": "",
-    "BlobStorageContainer": ""
-  }
-}
