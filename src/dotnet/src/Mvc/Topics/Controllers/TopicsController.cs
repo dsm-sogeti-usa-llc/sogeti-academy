@@ -1,16 +1,22 @@
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Extensions.Configuration;
+using System.Web.Mvc;
 using Sogeti.Academy.Application.Topics.Queries.GetList;
+using Sogeti.Academy.Infrastructure.Configuration;
 using Sogeti.Academy.Mvc.General.Http;
 
 namespace Sogeti.Academy.Mvc.Topics.Controllers
 {
-    [Route("topics")]
+    [RoutePrefix("topics")]
     public class TopicsController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly string _apiUrl;
+
+        public TopicsController()
+            : this(new HttpClientFactory(), new Configuration())
+        {
+            
+        }
 
         public TopicsController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
@@ -18,7 +24,8 @@ namespace Sogeti.Academy.Mvc.Topics.Controllers
             _apiUrl = configuration["Topics:ApiUrl"];
         }
 
-        public async Task<IActionResult> Index()
+        [Route("")]
+        public async Task<ActionResult> Index()
         {
             using (var client = _httpClientFactory.Create())
             {

@@ -2,7 +2,7 @@ using Microsoft.Azure.Documents;
 using Newtonsoft.Json;
 using Sogeti.Academy.Application.Presentations.Models;
 
-namespace Persistence.Test.Presentations
+namespace Sogeti.Academy.Persistence.Test.Presentations
 {
     public class PresentationDocument : Document
     {

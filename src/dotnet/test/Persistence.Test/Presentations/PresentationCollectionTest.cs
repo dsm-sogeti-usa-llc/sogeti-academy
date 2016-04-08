@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
-using Microsoft.Azure.Documents.Client;
 using Moq;
 using Sogeti.Academy.Application.Presentations.Models;
 using Sogeti.Academy.Persistence.Storage;
 using Xunit;
 using File = Sogeti.Academy.Application.Presentations.Models.File;
 
-namespace Persistence.Test.Presentations
+namespace Sogeti.Academy.Persistence.Test.Presentations
 {
     public class PresentationCollectionTest
     {

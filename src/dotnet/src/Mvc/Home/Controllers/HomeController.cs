@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Sogeti.Academy.Mvc.Home.Controllers
 {
-    [Route("home")]
-    [Route("")]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        [Route("")]
+        [Route("home")]
+        public ActionResult Index()
         {
             return View();
         }

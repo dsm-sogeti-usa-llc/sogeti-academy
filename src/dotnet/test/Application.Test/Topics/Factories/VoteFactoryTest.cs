@@ -1,8 +1,8 @@
-﻿namespace Application.Test.Topics.Factories
-{
-    using Sogeti.Academy.Application.Topics.Factories;
-    using Xunit;
+﻿using Sogeti.Academy.Application.Topics.Factories;
+using Xunit;
 
+namespace Sogeti.Academy.Application.Test.Topics.Factories
+{
     public class VoteFactoryTest
     {
         private readonly VoteFactory _voteFactory;

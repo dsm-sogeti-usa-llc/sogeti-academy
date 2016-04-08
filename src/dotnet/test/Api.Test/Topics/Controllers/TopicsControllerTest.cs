@@ -1,4 +1,6 @@
-﻿namespace Sogeti.Academy.Api.Test.Topics.Controllers
+﻿using System.Web.Http.Results;
+
+namespace Sogeti.Academy.Api.Test.Topics.Controllers
 {
     using System;
     using System.Threading.Tasks;
@@ -6,7 +8,6 @@
     using Application.Topics.Commands.Create;
     using Application.Topics.Commands.Vote;
     using Application.Topics.Queries.GetList;
-    using Microsoft.AspNet.Mvc;
     using Moq;
     using Xunit;
 
@@ -31,8 +32,8 @@
             var expected = new ListViewModel();
             _getListQueryMock.Setup(s => s.Execute()).ReturnsAsync(expected);
 
-            var result = (HttpOkObjectResult)await _topicsController.GetAll();
-            Assert.Same(expected, result.Value);
+            var result = (OkNegotiatedContentResult<ListViewModel>)await _topicsController.GetAll();
+            Assert.Same(expected, result.Content);
         }
 
         [Fact]
@@ -43,8 +44,8 @@
             _createTopicCommandMock.Setup(s => s.Execute(viewModel))
                 .ReturnsAsync(expected);
 
-            var result = (HttpOkObjectResult) await _topicsController.Create(viewModel);
-            Assert.Equal(expected, result.Value);
+            var result = (OkNegotiatedContentResult<string>) await _topicsController.Create(viewModel);
+            Assert.Equal(expected, result.Content);
         }
 
         [Fact]
@@ -55,7 +56,7 @@
 
             var result = await _topicsController.Vote(viewModel);
             _voteCommandMock.Verify(s => s.Execute(viewModel), Times.Once());
-            Assert.IsType<HttpOkResult>(result);
+            Assert.IsType<OkResult>(result);
         }
     }
 }

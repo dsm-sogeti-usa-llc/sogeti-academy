@@ -1,32 +1,30 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Extensions.Configuration;
+using System.Web.Mvc;
 using Moq;
 using Sogeti.Academy.Application.Topics.Queries.GetList;
+using Sogeti.Academy.Infrastructure.Configuration;
 using Sogeti.Academy.Mvc.General.Http;
 using Sogeti.Academy.Mvc.Topics.Controllers;
 using Xunit;
 
-namespace Mvc.Test.Topics.Controllers
+namespace Sogeti.Academy.Mvc.Test.Topics.Controllers
 {
     public class TopicsControllerTest
     {
         private const string ApiUrl = "http://dumptruck.bb.com";
         private readonly Mock<IHttpClient> _httpClientMock;
-        private readonly Mock<IHttpClientFactory> _httpClientFactoryMock;
-        private readonly Mock<IConfiguration> _configurationMock;
         private readonly TopicsController _topicsController;
 
         public TopicsControllerTest()
         {
             _httpClientMock = new Mock<IHttpClient>();
-            _httpClientFactoryMock = new Mock<IHttpClientFactory>();
-            _httpClientFactoryMock.Setup(s => s.Create()).Returns(_httpClientMock.Object);
+            var httpClientFactoryMock = new Mock<IHttpClientFactory>();
+            httpClientFactoryMock.Setup(s => s.Create()).Returns(_httpClientMock.Object);
 
-            _configurationMock = new Mock<IConfiguration>();
-            _configurationMock.Setup(s => s["Topics:ApiUrl"]).Returns(ApiUrl);
+            var configurationMock = new Mock<IConfiguration>();
+            configurationMock.Setup(s => s["Topics:ApiUrl"]).Returns(ApiUrl);
 
-            _topicsController = new TopicsController(_httpClientFactoryMock.Object, _configurationMock.Object);
+            _topicsController = new TopicsController(httpClientFactoryMock.Object, configurationMock.Object);
         }
 
         [Fact]

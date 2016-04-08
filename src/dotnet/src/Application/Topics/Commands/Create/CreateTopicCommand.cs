@@ -15,7 +15,13 @@ namespace Sogeti.Academy.Application.Topics.Commands.Create
     {
 		private readonly ITopicsContext _topicsContext;
         private readonly ITopicFactory _topicFactory;
-		
+
+        public CreateTopicCommand(ITopicsContext topicsContext)
+            : this(topicsContext, new TopicFactory())
+        {
+            
+        }
+
 		public CreateTopicCommand(ITopicsContext topicsContext, ITopicFactory topicFactory)
 		{
 			_topicsContext = topicsContext;

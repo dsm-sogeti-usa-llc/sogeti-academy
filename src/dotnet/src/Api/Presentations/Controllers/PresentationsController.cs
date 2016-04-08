@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
+using System.Web.Http;
+using System.Web.Http.ModelBinding;
+using Sogeti.Academy.Api.General.Results;
 using Sogeti.Academy.Api.Presentations.ModelBinders;
 using Sogeti.Academy.Application.Presentations.Commands.Add;
 using Sogeti.Academy.Application.Presentations.Commands.Edit;
@@ -7,11 +9,12 @@ using Sogeti.Academy.Application.Presentations.Commands.Remove;
 using Sogeti.Academy.Application.Presentations.Queries.GetDetail;
 using Sogeti.Academy.Application.Presentations.Queries.GetFile;
 using Sogeti.Academy.Application.Presentations.Queries.GetList;
+using Sogeti.Academy.Persistence.Presentations.Storage;
 
 namespace Sogeti.Academy.Api.Presentations.Controllers
 {
-    [Route("presentations")]
-    public class PresentationsController : Controller
+    [RoutePrefix("presentations")]
+    public class PresentationsController : ApiController
     {
         private readonly IGetListQuery _getListQuery;
         private readonly IGetDetailQuery _getDetailQuery;
@@ -19,6 +22,17 @@ namespace Sogeti.Academy.Api.Presentations.Controllers
         private readonly IAddPresentationCommand _addPresentationCommand;
         private readonly IEditPresentationCommand _editPresentationCommand;
         private readonly IRemovePresentationCommand _removePresentationCommand;
+
+        public PresentationsController()
+            : this(new GetListQuery(new PresentationContext()), 
+                  new GetDetailQuery(new PresentationContext()), 
+                  new GetFileQuery(new PresentationContext()), 
+                  new AddPresentationCommand(new PresentationContext()), 
+                  new EditPresentationCommand(new PresentationContext()), 
+                  new RemovePresentationCommand(new PresentationContext()))  
+        {
+            
+        }
 
         public PresentationsController(IGetListQuery getListQuery, IGetDetailQuery getDetailQuery, IGetFileQuery getFileQuery, IAddPresentationCommand addPresentationCommand, IEditPresentationCommand editPresentationCommand, IRemovePresentationCommand removePresentationCommand)
         {
@@ -30,43 +44,49 @@ namespace Sogeti.Academy.Api.Presentations.Controllers
             _removePresentationCommand = removePresentationCommand;
         }
 
-        [HttpGet("")]
-        public async Task<IActionResult> GetAll()
+        [HttpGet]
+        [Route("")]
+        public async Task<IHttpActionResult> GetAll()
         {
             var viewModel = await _getListQuery.Execute();
             return Ok(viewModel);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetDetail(string id)
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IHttpActionResult> GetDetail(string id)
         {
             var viewModel = await _getDetailQuery.Execute(id);
             return Ok(viewModel);
         }
 
-        [HttpGet("{presentationId}/files/{fileId}")]
-        public async Task<IActionResult> GetFile(string presentationId, string fileId)
+        [HttpGet]
+        [Route("{presentationId}/files/{fileId}")]
+        public async Task<IHttpActionResult> GetFile(string presentationId, string fileId)
         {
             var viewModel = await _getFileQuery.Execute(presentationId, fileId);
-            return File(viewModel.Bytes, viewModel.Type, viewModel.Name);
+            return new FileResult(viewModel);
         }
 
-        [HttpPost("")]
-        public async Task<IActionResult> Add([ModelBinder(BinderType = typeof(AddPresentationViewModelBinder))] AddPresentationViewModel viewModel)
+        [HttpPost]
+        [Route("")]
+        public async Task<IHttpActionResult> Add([ModelBinder(BinderType = typeof(AddPresentationViewModelBinder))] AddPresentationViewModel viewModel)
         {
             var id = await _addPresentationCommand.Execute(viewModel);
             return Ok(id);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Edit([ModelBinder(BinderType = typeof(EditPresentationViewModelBinder))] EditPresentationViewModel viewModel)
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IHttpActionResult> Edit([ModelBinder(BinderType = typeof(EditPresentationViewModelBinder))] EditPresentationViewModel viewModel)
         {
             await _editPresentationCommand.Execute(viewModel);
             return Ok();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Remove(RemovePresentationViewModel viewModel)
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IHttpActionResult> Remove(RemovePresentationViewModel viewModel)
         {
             await _removePresentationCommand.Execute(viewModel);
             return Ok();

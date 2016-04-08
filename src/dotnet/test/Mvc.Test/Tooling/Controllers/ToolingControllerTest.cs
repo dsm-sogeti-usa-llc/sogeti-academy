@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using System.Web.Mvc;
 using Sogeti.Academy.Mvc.Tooling.Controllers;
 using Xunit;
 
-namespace Mvc.Test.Tooling.Controllers
+namespace Sogeti.Academy.Mvc.Test.Tooling.Controllers
 {
     public class ToolingControllerTest
     {

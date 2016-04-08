@@ -15,6 +15,12 @@ namespace Sogeti.Academy.Application.Presentations.Factories
     {
         private readonly IFileFactory _fileFactory;
 
+        public PresentationFactory()
+            : this(new FileFactory())
+        {
+            
+        }
+
         public PresentationFactory(IFileFactory fileFactory)
         {
             _fileFactory = fileFactory;

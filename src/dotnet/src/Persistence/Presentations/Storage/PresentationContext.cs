@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using Sogeti.Academy.Application.Presentations.Models;
+﻿using Sogeti.Academy.Application.Presentations.Models;
 using Sogeti.Academy.Application.Presentations.Storage;
+using Sogeti.Academy.Infrastructure.Configuration;
 using Sogeti.Academy.Persistence.Storage;
 
 namespace Sogeti.Academy.Persistence.Presentations.Storage
@@ -8,6 +8,13 @@ namespace Sogeti.Academy.Persistence.Presentations.Storage
     public class PresentationContext : DocumentContext, IPresentationContext
     {
         private readonly IPresentationBlobStorage _blobStorage;
+
+
+        public PresentationContext()
+            : this(new Configuration(), new PresentationBlobStorage())
+        {
+            
+        }
 
         public PresentationContext(IConfiguration configuration, IPresentationBlobStorage blobStorage)
             : base(configuration["Presentations:DocumentDbEndpiontUrl"], configuration["Presentations:DocumentDbAuthKey"])

@@ -8,7 +8,7 @@ using Sogeti.Academy.Application.Presentations.Storage;
 using Sogeti.Academy.Application.Storage;
 using Xunit;
 
-namespace Application.Test.Presentations.Commands.Add
+namespace Sogeti.Academy.Application.Test.Presentations.Commands.Add
 {
     public class AddPresentationCommandTest
     {

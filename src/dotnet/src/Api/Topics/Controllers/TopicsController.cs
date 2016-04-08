@@ -1,18 +1,27 @@
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
+using System.Web.Http;
 using Sogeti.Academy.Application.Topics.Commands.Create;
 using Sogeti.Academy.Application.Topics.Commands.Vote;
 using Sogeti.Academy.Application.Topics.Queries.GetList;
+using Sogeti.Academy.Persistence.Topics.Storage;
 
 namespace Sogeti.Academy.Api.Topics.Controllers
 {
-	[Route("topics")]
-	public class TopicsController : Controller
+	[RoutePrefix("topics")]
+	public class TopicsController : ApiController
 	{
 		private readonly IGetListQuery _getListQuery;
 		private readonly ICreateTopicCommand _createTopicCommand;
 		private readonly IVoteCommand _topicVoteCommand;
-		
+
+	    public TopicsController()
+            : this(new GetListQuery(new TopicsContext()), 
+                  new CreateTopicCommand(new TopicsContext()), 
+                  new VoteCommand(new TopicsContext()))
+	    {
+	        
+	    }
+
 		public TopicsController(IGetListQuery getListQuery, 
 			ICreateTopicCommand createTopicCommand, 
 			IVoteCommand topicVoteCommand)
@@ -22,22 +31,25 @@ namespace Sogeti.Academy.Api.Topics.Controllers
 			_topicVoteCommand = topicVoteCommand;
 		}
 
-        [HttpGet("")]
-        public async Task<IActionResult> GetAll()
+        [HttpGet]
+        [Route("")]
+        public async Task<IHttpActionResult> GetAll()
         {
 			var viewModel = await _getListQuery.Execute();
             return Ok(viewModel);
         }
 		
-		[HttpPost("")]
-		public async Task<IActionResult> Create(CreateTopicViewModel viewModel)
+		[HttpPost]
+        [Route("")]
+		public async Task<IHttpActionResult> Create(CreateTopicViewModel viewModel)
 		{
 			var id = await _createTopicCommand.Execute(viewModel);
 			return Ok(id);
 		}		
 		
-		[HttpPost("{id}/vote")]
-		public async Task<IActionResult> Vote([FromBody]VoteViewModel viewModel)
+		[HttpPost]
+        [Route("{id}/vote")]
+		public async Task<IHttpActionResult> Vote([FromBody]VoteViewModel viewModel)
 		{
             await _topicVoteCommand.Execute(viewModel);
 			return Ok();

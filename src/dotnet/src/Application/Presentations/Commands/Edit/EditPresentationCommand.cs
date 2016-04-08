@@ -18,6 +18,12 @@ namespace Sogeti.Academy.Application.Presentations.Commands.Edit
         private readonly IPresentationContext _presentationContext;
         private readonly IFileFactory _fileFactory;
 
+        public EditPresentationCommand(IPresentationContext presentationContext)
+            : this(presentationContext, new FileFactory())
+        {
+            
+        }
+
         public EditPresentationCommand(IPresentationContext presentationContext, IFileFactory fileFactory)
         {
             _presentationContext = presentationContext;

@@ -1,9 +1,9 @@
-﻿namespace Infrastructure.Test.Locator
-{
-    using System.Linq;
-    using Sogeti.Academy.Infrastructure.Locator;
-    using Xunit;
+﻿using System.Linq;
+using Sogeti.Academy.Infrastructure.Locator;
+using Xunit;
 
+namespace Sogeti.Academy.Infrastructure.Test.Locator
+{
     public class LocatorTest
     {
         private readonly Locator<IDontDoAnything> _locator;

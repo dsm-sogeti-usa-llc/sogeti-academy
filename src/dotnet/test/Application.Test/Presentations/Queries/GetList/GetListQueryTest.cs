@@ -8,7 +8,7 @@ using Sogeti.Academy.Application.Presentations.Storage;
 using Sogeti.Academy.Application.Storage;
 using Xunit;
 
-namespace Application.Test.Presentations.Queries.GetList
+namespace Sogeti.Academy.Application.Test.Presentations.Queries.GetList
 {
     public class GetListQueryTest
     {

@@ -1,15 +1,15 @@
-﻿namespace Application.Test.Topics.Queries.GetList
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Moq;
-    using Sogeti.Academy.Application.Storage;
-    using Sogeti.Academy.Application.Topics.Models;
-    using Sogeti.Academy.Application.Topics.Queries.GetList;
-    using Sogeti.Academy.Application.Topics.Storage;
-    using Xunit;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Moq;
+using Sogeti.Academy.Application.Storage;
+using Sogeti.Academy.Application.Topics.Models;
+using Sogeti.Academy.Application.Topics.Queries.GetList;
+using Sogeti.Academy.Application.Topics.Storage;
+using Xunit;
 
+namespace Sogeti.Academy.Application.Test.Topics.Queries.GetList
+{
     public class GetListQueryTest
     {
         private readonly Mock<IDocumentCollection<Topic>> _topicCollectionMock;

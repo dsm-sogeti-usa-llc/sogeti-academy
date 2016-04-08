@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using Moq;
+﻿using Moq;
 using Sogeti.Academy.Application.Presentations.Models;
+using Sogeti.Academy.Infrastructure.Configuration;
 using Sogeti.Academy.Persistence.Presentations.Storage;
 using Xunit;
 
-namespace Persistence.Test.Presentations
+namespace Sogeti.Academy.Persistence.Test.Presentations
 {
     public class PresentationContextTest
     {
@@ -12,9 +12,9 @@ namespace Persistence.Test.Presentations
 
         public PresentationContextTest()
         {
-            var configuration = new ConfigurationBuilder().AddEnvironmentVariables().Build();
             var blobStorageMock = new Mock<IPresentationBlobStorage>();
-            _presentationContext = new PresentationContext(configuration, blobStorageMock.Object);
+            var configurationMock = new Mock<IConfiguration>();
+            _presentationContext = new PresentationContext(configurationMock.Object, blobStorageMock.Object);
         }
 
         [Fact]

@@ -5,3 +5,7 @@ __build__
 .vs
 **/project.lock.json
 typings
+**/packages
+**/obj
+**/bin
+**/*.DotSettings.user

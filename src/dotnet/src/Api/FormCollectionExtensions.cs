@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Http;
+﻿using Microsoft.Owin;
 
 namespace Sogeti.Academy.Api
 {
@@ -6,8 +6,8 @@ namespace Sogeti.Academy.Api
     {
         public static string GetStringOrNull(this IFormCollection formCollection, string key)
         {
-            return formCollection.ContainsKey(key)
-                ? (string)formCollection[key]
+            return formCollection.Get(key) != null
+                ? formCollection[key]
                 : null;
         }
     }

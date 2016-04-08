@@ -5,7 +5,7 @@ using Sogeti.Academy.Application.Presentations.Factories;
 using Sogeti.Academy.Application.Presentations.Models;
 using Xunit;
 
-namespace Application.Test.Presentations.Factories
+namespace Sogeti.Academy.Application.Test.Presentations.Factories
 {
     public class PresentationFactoryTest
     {

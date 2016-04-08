@@ -1,16 +1,16 @@
-﻿namespace Application.Test.Topics.Commands.Vote
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Moq;
-    using Sogeti.Academy.Application.Storage;
-    using Sogeti.Academy.Application.Topics.Commands.Vote;
-    using Sogeti.Academy.Application.Topics.Factories;
-    using Sogeti.Academy.Application.Topics.Models;
-    using Sogeti.Academy.Application.Topics.Storage;
-    using Xunit;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Moq;
+using Sogeti.Academy.Application.Storage;
+using Sogeti.Academy.Application.Topics.Commands.Vote;
+using Sogeti.Academy.Application.Topics.Factories;
+using Sogeti.Academy.Application.Topics.Models;
+using Sogeti.Academy.Application.Topics.Storage;
+using Xunit;
 
+namespace Sogeti.Academy.Application.Test.Topics.Commands.Vote
+{
     public class VoteCommandTest
     {
         private readonly Mock<IDocumentCollection<Topic>> _topicCollectionMock;
@@ -36,10 +36,10 @@
                 Email = Guid.NewGuid().ToString()
             };
 
-            var topic = new Topic {Votes = new List<Vote>()};
+            var topic = new Topic {Votes = new List<Application.Topics.Models.Vote>()};
             _topicCollectionMock.Setup(s => s.GetByIdAsync(viewModel.TopicId)).ReturnsAsync(topic);
 
-            var vote = new Vote();
+            var vote = new Application.Topics.Models.Vote();
             _voteFactoryMock.Setup(s => s.Create(viewModel.Email)).Returns(vote);
 
             await _voteCommand.Execute(viewModel);
@@ -51,7 +51,7 @@
         {
             var viewModel = new VoteViewModel {TopicId = Guid.NewGuid().ToString()};
 
-            var topic = new Topic {Votes = new List<Vote>()};
+            var topic = new Topic {Votes = new List<Application.Topics.Models.Vote>()};
             _topicCollectionMock.Setup(s => s.GetByIdAsync(viewModel.TopicId)).ReturnsAsync(topic);
 
             await _voteCommand.Execute(viewModel);

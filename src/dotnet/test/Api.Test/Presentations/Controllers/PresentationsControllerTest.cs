@@ -1,9 +1,10 @@
 ﻿using System;
-using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
+using System.Web.Http;
+using System.Web.Http.Results;
 using Moq;
+using Sogeti.Academy.Api.General.Results;
 using Sogeti.Academy.Api.Presentations.Controllers;
 using Sogeti.Academy.Application.Presentations.Commands.Add;
 using Sogeti.Academy.Application.Presentations.Commands.Edit;
@@ -49,8 +50,8 @@ namespace Sogeti.Academy.Api.Test.Presentations.Controllers
             var expected = new ListViewModel();
             _getListQueryMock.Setup(s => s.Execute()).ReturnsAsync(expected);
 
-            var result = (HttpOkObjectResult)await _presentationsController.GetAll();
-            Assert.Same(expected, result.Value);
+            var result = (OkNegotiatedContentResult<ListViewModel>)await _presentationsController.GetAll();
+            Assert.Same(expected, result.Content);
         }
 
         [Fact]
@@ -67,10 +68,8 @@ namespace Sogeti.Academy.Api.Test.Presentations.Controllers
             };
             _getFileQueryMock.Setup(s => s.Execute(presentationId, fileId)).ReturnsAsync(viewModel);
 
-            var result = (FileContentResult)await _presentationsController.GetFile(presentationId, fileId);
-            Assert.Equal(viewModel.Bytes, result.FileContents);
-            Assert.Equal(viewModel.Name, result.FileDownloadName);
-            Assert.Equal(viewModel.Type, result.ContentType.MediaType);
+            var result = (FileResult)await _presentationsController.GetFile(presentationId, fileId);
+            Assert.Same(viewModel, result.ViewModel);
         }
 
         [Fact]
@@ -81,8 +80,8 @@ namespace Sogeti.Academy.Api.Test.Presentations.Controllers
             var id = Guid.NewGuid().ToString();
             _getDetailQueryMock.Setup(s => s.Execute(id)).ReturnsAsync(viewModel);
 
-            var result = (HttpOkObjectResult) await _presentationsController.GetDetail(id);
-            Assert.Same(viewModel, result.Value);
+            var result = (OkNegotiatedContentResult<PresentationDetailViewModel>) await _presentationsController.GetDetail(id);
+            Assert.Same(viewModel, result.Content);
         }
 
         [Fact]
@@ -93,8 +92,8 @@ namespace Sogeti.Academy.Api.Test.Presentations.Controllers
             var expected = Guid.NewGuid().ToString();
             _addPresentationCommandMock.Setup(s => s.Execute(viewModel)).ReturnsAsync(expected);
 
-            var result = (HttpOkObjectResult) await _presentationsController.Add(viewModel);
-            Assert.Equal(expected, result.Value);
+            var result = (OkNegotiatedContentResult<string>) await _presentationsController.Add(viewModel);
+            Assert.Equal(expected, result.Content);
         }
 
         [Fact]
@@ -102,9 +101,9 @@ namespace Sogeti.Academy.Api.Test.Presentations.Controllers
         {
             var viewModel = new EditPresentationViewModel();
 
-            var result = (HttpOkResult) await _presentationsController.Edit(viewModel);
+            var result = await _presentationsController.Edit(viewModel);
             _editPresentationCommandMock.Verify(s => s.Execute(viewModel), Times.Once());
-            Assert.Equal(200, result.StatusCode);
+            Assert.IsType<OkResult>(result);
         }
 
         [Fact]
@@ -112,58 +111,69 @@ namespace Sogeti.Academy.Api.Test.Presentations.Controllers
         {
             var viewModel = new RemovePresentationViewModel();
 
-            var result = (HttpOkResult) await _presentationsController.Remove(viewModel);
-            Assert.Equal(200, result.StatusCode);
+            var result = await _presentationsController.Remove(viewModel);
+            Assert.IsType<OkResult>(result);
             _removePresentationCommandMock.Verify(s => s.Execute(viewModel), Times.Once());
         }
 
         [Fact]
         public void Controller_ShouldSpecifyRoute()
         {
-            var route = PresentationsControllerType.GetCustomAttribute<RouteAttribute>();
-            Assert.Equal("presentations", route.Template);
+            var route = PresentationsControllerType.GetCustomAttribute<RoutePrefixAttribute>();
+            Assert.Equal("presentations", route.Prefix);
         }
 
         [Fact]
         public void GetAll_ShouldSpecifyGet()
         {
             var attribute = PresentationsControllerType.GetMethod("GetAll").GetCustomAttribute<HttpGetAttribute>();
-            Assert.Equal("", attribute.Template);
+            var route = PresentationsControllerType.GetMethod("GetAll").GetCustomAttribute<RouteAttribute>();
+            Assert.Equal("", route.Template);
+            Assert.IsType<HttpGetAttribute>(attribute);
         }
 
         [Fact]
         public void GetDetail_ShouldSpecifyGet()
         {
+            var route = PresentationsControllerType.GetMethod("GetDetail").GetCustomAttribute<RouteAttribute>();
             var attribute = PresentationsControllerType.GetMethod("GetDetail").GetCustomAttribute<HttpGetAttribute>();
-            Assert.Equal("{id}", attribute.Template);
+            Assert.Equal("{id}", route.Template);
         }
 
         [Fact]
         public void GetFile_ShouldSpecifyGet()
         {
+            var route = PresentationsControllerType.GetMethod("GetFile").GetCustomAttribute<RouteAttribute>();
             var attribute = PresentationsControllerType.GetMethod("GetFile").GetCustomAttribute<HttpGetAttribute>();
-            Assert.Equal("{presentationId}/files/{fileId}", attribute.Template);
+            Assert.Equal("{presentationId}/files/{fileId}", route.Template);
+            Assert.IsType<HttpGetAttribute>(attribute);
         }
 
         [Fact]
         public void Add_ShouldSpecifyPost()
         {
             var attribute = PresentationsControllerType.GetMethod("Add").GetCustomAttribute<HttpPostAttribute>();
-            Assert.Equal("", attribute.Template);
+            var route = PresentationsControllerType.GetMethod("Add").GetCustomAttribute<RouteAttribute>();
+            Assert.Equal("", route.Template);
+            Assert.IsType<HttpPostAttribute>(attribute);
         }
 
         [Fact]
         public void Edit_ShouldSpecifyPut()
         {
             var attribute = PresentationsControllerType.GetMethod("Edit").GetCustomAttribute<HttpPutAttribute>();
-            Assert.Equal("{id}", attribute.Template);
+            var route = PresentationsControllerType.GetMethod("Edit").GetCustomAttribute<RouteAttribute>();
+            Assert.Equal("{id}", route.Template);
+            Assert.IsType<HttpPutAttribute>(attribute);
         }
 
         [Fact]
         public void Remove_ShouldSpecifyDelete()
         {
             var attribute = PresentationsControllerType.GetMethod("Remove").GetCustomAttribute<HttpDeleteAttribute>();
-            Assert.Equal("{id}", attribute.Template);
+            var route = PresentationsControllerType.GetMethod("Remove").GetCustomAttribute<RouteAttribute>();
+            Assert.Equal("{id}", route.Template);
+            Assert.IsType<HttpDeleteAttribute>(attribute);
         }
     }
 }

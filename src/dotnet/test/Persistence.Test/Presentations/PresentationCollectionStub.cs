@@ -7,9 +7,8 @@ using Sogeti.Academy.Application.Presentations.Models;
 using Sogeti.Academy.Infrastructure.Storage;
 using Sogeti.Academy.Persistence.Presentations.Storage;
 using Sogeti.Academy.Persistence.Storage;
-using Sogeti.Academy.Persistence.Storage.Adapters;
 
-namespace Persistence.Test.Presentations
+namespace Sogeti.Academy.Persistence.Test.Presentations
 {
     public class PresentationCollectionStub : PresentationCollection
     {

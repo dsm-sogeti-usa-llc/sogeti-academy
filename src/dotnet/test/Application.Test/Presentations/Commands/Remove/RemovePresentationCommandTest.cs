@@ -7,7 +7,7 @@ using Sogeti.Academy.Application.Presentations.Storage;
 using Sogeti.Academy.Application.Storage;
 using Xunit;
 
-namespace Application.Test.Presentations.Commands.Remove
+namespace Sogeti.Academy.Application.Test.Presentations.Commands.Remove
 {
     public class RemovePresentationCommandTest
     {

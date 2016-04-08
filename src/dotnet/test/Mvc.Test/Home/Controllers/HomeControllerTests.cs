@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using System.Web.Mvc;
 using Sogeti.Academy.Mvc.Home.Controllers;
 using Xunit;
 
-namespace Mvc.Test.Home.Controllers
+namespace Sogeti.Academy.Mvc.Test.Home.Controllers
 {
     public class HomeControllerTests
     {

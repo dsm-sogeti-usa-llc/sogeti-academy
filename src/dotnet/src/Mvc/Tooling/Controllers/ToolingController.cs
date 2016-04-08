@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Sogeti.Academy.Mvc.Tooling.Controllers
 {
-    [Route("tooling")]
+    [RoutePrefix("tooling")]
     public class ToolingController : Controller
     {
-        public IActionResult Index()
+        [Route("")]
+        public ActionResult Index()
         {
             return View();
         }

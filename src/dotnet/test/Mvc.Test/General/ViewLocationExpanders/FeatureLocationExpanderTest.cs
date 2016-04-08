@@ -1,25 +1,21 @@
-﻿using System.Collections.Generic;
-using Sogeti.Academy.Mvc.General.ViewLocationExpanders;
+﻿using Sogeti.Academy.Mvc.General;
 using Xunit;
 
-namespace Mvc.Test.General.ViewLocationExpanders
+namespace Sogeti.Academy.Mvc.Test.General.ViewLocationExpanders
 {
     public class FeatureLocationExpanderTest
     {
-        private readonly FeatureLocationExpander _featureLocationExpander;
+        private readonly FeatureViewEngine _featureViewEngine;
 
         public FeatureLocationExpanderTest()
         {
-            _featureLocationExpander = new FeatureLocationExpander();
+            _featureViewEngine = new FeatureViewEngine();
         }
 
         [Fact]
         public void ExpandViewLocations_ShouldAddFeatureLevelViewsToViewLocations()
         {
-            var viewLocations = new List<string>();
-            var actual = _featureLocationExpander.ExpandViewLocations(null, viewLocations);
-
-            Assert.Contains("~/{1}/Views/{0}.cshtml", actual);
+            Assert.Contains("~/{1}/Views/{0}.cshtml", _featureViewEngine.ViewLocationFormats);
         }
     }
 }

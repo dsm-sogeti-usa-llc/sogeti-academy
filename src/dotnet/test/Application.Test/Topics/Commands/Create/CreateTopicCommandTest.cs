@@ -1,15 +1,15 @@
-﻿namespace Application.Test.Topics.Commands.Create
-{
-    using System;
-    using System.Threading.Tasks;
-    using Moq;
-    using Sogeti.Academy.Application.Storage;
-    using Sogeti.Academy.Application.Topics.Commands.Create;
-    using Sogeti.Academy.Application.Topics.Factories;
-    using Sogeti.Academy.Application.Topics.Models;
-    using Sogeti.Academy.Application.Topics.Storage;
-    using Xunit;
+﻿using System;
+using System.Threading.Tasks;
+using Moq;
+using Sogeti.Academy.Application.Storage;
+using Sogeti.Academy.Application.Topics.Commands.Create;
+using Sogeti.Academy.Application.Topics.Factories;
+using Sogeti.Academy.Application.Topics.Models;
+using Sogeti.Academy.Application.Topics.Storage;
+using Xunit;
 
+namespace Sogeti.Academy.Application.Test.Topics.Commands.Create
+{
     public class CreateTopicCommandTest
     {
         private readonly Mock<IDocumentCollection<Topic>> _topicCollectionMock;

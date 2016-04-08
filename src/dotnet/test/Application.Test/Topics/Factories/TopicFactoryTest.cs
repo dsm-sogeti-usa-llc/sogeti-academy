@@ -1,9 +1,9 @@
-﻿namespace Application.Test.Topics.Factories
-{
-    using System;
-    using Sogeti.Academy.Application.Topics.Factories;
-    using Xunit;
+﻿using System;
+using Sogeti.Academy.Application.Topics.Factories;
+using Xunit;
 
+namespace Sogeti.Academy.Application.Test.Topics.Factories
+{
     public class TopicFactoryTest
     {
         private readonly TopicFactory _topicFactory;

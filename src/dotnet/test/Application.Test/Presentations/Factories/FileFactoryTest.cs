@@ -3,7 +3,7 @@ using Sogeti.Academy.Application.Presentations.Commands.Add;
 using Sogeti.Academy.Application.Presentations.Factories;
 using Xunit;
 
-namespace Application.Test.Presentations.Factories
+namespace Sogeti.Academy.Application.Test.Presentations.Factories
 {
     public class FileFactoryTest
     {

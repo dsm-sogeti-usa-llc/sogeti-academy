@@ -16,6 +16,12 @@ namespace Sogeti.Academy.Application.Presentations.Commands.Add
         private readonly IPresentationContext _presentationContext;
         private readonly IPresentationFactory _presentationFactory;
 
+        public AddPresentationCommand(IPresentationContext context)
+            : this(context, new PresentationFactory())
+        {
+            
+        }
+
         public AddPresentationCommand(IPresentationContext presentationContext, IPresentationFactory presentationFactory)
         {
             _presentationContext = presentationContext;

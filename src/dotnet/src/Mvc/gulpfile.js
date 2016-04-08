@@ -1,16 +1,16 @@
+/// <binding AfterBuild='build:client' />
 var gulp = require('gulp');
-var shell = require('gulp-shell');
 var concat = require('gulp-concat');
 var watch = require('gulp-watch');
 var replace = require('gulp-replace');
 var path = require('path');
 
 var assets = {
-    jsdest: path.join(__dirname, 'wwwroot', 'js'),
+    jsdest: path.join(__dirname, 'js'),
     js: [
         path.join(__dirname, '**/scripts/**/*.js')
     ],
-    cssdest: path.join(__dirname, 'wwwroot', 'css'),
+    cssdest: path.join(__dirname, 'css'),
     css: [
         path.join(__dirname, '**/styles/**/*.css')
     ]
@@ -29,8 +29,4 @@ gulp.task('build:css', function(){
         .pipe(gulp.dest(assets.cssdest));
 });
 
-gulp.task('build:dnx', shell.task(['dnu publish']));
-
 gulp.task('build:client', ['build:js', 'build:css']);
-
-gulp.task('build:all', ['build:client', 'build:dnx'])

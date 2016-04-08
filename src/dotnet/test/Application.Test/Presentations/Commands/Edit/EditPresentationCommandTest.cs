@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using Moq;
 using Sogeti.Academy.Application.Presentations.Commands.Edit;
@@ -11,7 +10,7 @@ using Sogeti.Academy.Application.Storage;
 using Xunit;
 using File = Sogeti.Academy.Application.Presentations.Models.File;
 
-namespace Application.Test.Presentations.Commands.Edit
+namespace Sogeti.Academy.Application.Test.Presentations.Commands.Edit
 {
     public class EditPresentationCommandTest
     {

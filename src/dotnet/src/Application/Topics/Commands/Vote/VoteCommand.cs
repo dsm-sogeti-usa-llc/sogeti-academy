@@ -14,7 +14,13 @@ namespace Sogeti.Academy.Application.Topics.Commands.Vote
     {
 		private readonly ITopicsContext _toipcsContext;
 		private readonly IVoteFactory _voteFactory;
-		
+
+        public VoteCommand(ITopicsContext topicsContext)
+            : this(topicsContext, new VoteFactory())
+        {
+            
+        }
+
 		public VoteCommand(ITopicsContext topicsContext, IVoteFactory voteFactory)
 		{
 			_toipcsContext = topicsContext;

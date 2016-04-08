@@ -1,7 +1,7 @@
 ﻿using Sogeti.Academy.Mvc.General.Http;
 using Xunit;
 
-namespace Mvc.Test.General.Http
+namespace Sogeti.Academy.Mvc.Test.General.Http
 {
     public class HttpClientFactoryTest
     {
