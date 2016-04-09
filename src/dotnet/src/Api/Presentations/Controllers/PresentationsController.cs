@@ -1,8 +1,9 @@
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
+using Sogeti.Academy.Api.General.Http;
 using Sogeti.Academy.Api.General.Results;
-using Sogeti.Academy.Api.Presentations.ModelBinders;
+using Sogeti.Academy.Api.Presentations.Factories;
 using Sogeti.Academy.Application.Presentations.Commands.Add;
 using Sogeti.Academy.Application.Presentations.Commands.Edit;
 using Sogeti.Academy.Application.Presentations.Commands.Remove;
@@ -22,6 +23,8 @@ namespace Sogeti.Academy.Api.Presentations.Controllers
         private readonly IAddPresentationCommand _addPresentationCommand;
         private readonly IEditPresentationCommand _editPresentationCommand;
         private readonly IRemovePresentationCommand _removePresentationCommand;
+        private readonly IAddPresentationViewModelFactory _addPresentationViewModelFactory;
+        private readonly IEditPresentationViewModelFactory _editPresentationViewModelFactory;
 
         public PresentationsController()
             : this(new GetListQuery(new PresentationContext()), 
@@ -29,12 +32,13 @@ namespace Sogeti.Academy.Api.Presentations.Controllers
                   new GetFileQuery(new PresentationContext()), 
                   new AddPresentationCommand(new PresentationContext()), 
                   new EditPresentationCommand(new PresentationContext()), 
-                  new RemovePresentationCommand(new PresentationContext()))  
+                  new RemovePresentationCommand(new PresentationContext()),
+                  new Server())  
         {
             
         }
 
-        public PresentationsController(IGetListQuery getListQuery, IGetDetailQuery getDetailQuery, IGetFileQuery getFileQuery, IAddPresentationCommand addPresentationCommand, IEditPresentationCommand editPresentationCommand, IRemovePresentationCommand removePresentationCommand)
+        public PresentationsController(IGetListQuery getListQuery, IGetDetailQuery getDetailQuery, IGetFileQuery getFileQuery, IAddPresentationCommand addPresentationCommand, IEditPresentationCommand editPresentationCommand, IRemovePresentationCommand removePresentationCommand, IServer server)
         {
             _getListQuery = getListQuery;
             _getDetailQuery = getDetailQuery;
@@ -42,6 +46,8 @@ namespace Sogeti.Academy.Api.Presentations.Controllers
             _addPresentationCommand = addPresentationCommand;
             _editPresentationCommand = editPresentationCommand;
             _removePresentationCommand = removePresentationCommand;
+            _addPresentationViewModelFactory = new AddPresentationViewModelFactory(server);
+            _editPresentationViewModelFactory = new EditPresentationViewModelFactory(server);
         }
 
         [HttpGet]
@@ -70,16 +76,18 @@ namespace Sogeti.Academy.Api.Presentations.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<IHttpActionResult> Add([ModelBinder(BinderType = typeof(AddPresentationViewModelBinder))] AddPresentationViewModel viewModel)
+        public async Task<IHttpActionResult> Add()
         {
+            var viewModel = await _addPresentationViewModelFactory.Create(Request);
             var id = await _addPresentationCommand.Execute(viewModel);
             return Ok(id);
         }
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IHttpActionResult> Edit([ModelBinder(BinderType = typeof(EditPresentationViewModelBinder))] EditPresentationViewModel viewModel)
+        public async Task<IHttpActionResult> Edit()
         {
+            var viewModel = await _editPresentationViewModelFactory.Create(Request);
             await _editPresentationCommand.Execute(viewModel);
             return Ok();
         }

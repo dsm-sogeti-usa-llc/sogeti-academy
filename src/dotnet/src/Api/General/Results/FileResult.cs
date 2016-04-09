@@ -27,7 +27,7 @@ namespace Sogeti.Academy.Api.General.Results
             };
             response.Content.Headers.ContentType = new MediaTypeHeaderValue(_viewModel.Type);
             response.Content.Headers.ContentLength = _viewModel.Bytes.LongLength;
-            response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("")
+            response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
                 FileName = _viewModel.Name,
                 Size = _viewModel.Bytes.LongLength
